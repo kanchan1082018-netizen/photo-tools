@@ -1,0 +1,2389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QuickPhotoGrid - Zero-Waste Passport & ID Card Sheet Packing Studio</title>
+  <meta name="description" content="Professional zero-waste passport photo and ID document sheet packing studio. 18 international biometric presets, dynamic zero-gap row packing, custom draggable ID card cropping, and strict 1-page print engine.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              dark: '#070f1e',
+              panel: '#0c172b',
+              panelHover: '#111f38',
+              card: '#0e1b33',
+              border: '#1a2947',
+              borderLight: '#263b63',
+              cyan: '#00d2ff',
+              emerald: '#00b779',
+              emeraldHover: '#00a36b',
+              blue: '#0284c7',
+              amber: '#f59e0b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Slim Scrollbars for Independent Sidebar Scrolling */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+
+    /* Range Sliders */
+    input[type=range] {
+      -webkit-appearance: none;
+      background: #162644;
+      border-radius: 9999px;
+      height: 6px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      background: #0284c7;
+      cursor: pointer;
+      border: 2px solid #070f1e;
+      box-shadow: 0 0 8px rgba(2, 132, 199, 0.5);
+    }
+    input[type=range]::-moz-range-thumb {
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      background: #0284c7;
+      cursor: pointer;
+      border: 2px solid #070f1e;
+    }
+
+    /* Accordion transitions */
+    .faq-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease-out, padding 0.25s ease-out;
+    }
+    .faq-item.open .faq-content {
+      max-height: 500px;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    /* =========================================================================
+       BUG 3 FIX: FAQ HOVER BLACKOUT BUG ELIMINATION
+       ========================================================================= */
+    .faq-item {
+      background-color: #0e1b33 !important;
+      border: 1px solid #1a2947 !important;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .faq-toggle {
+      background-color: transparent !important;
+      color: #f8fafc !important;
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
+    .faq-toggle:hover,
+    .faq-item:hover .faq-toggle {
+      background-color: #1e293b !important;
+      color: #93c5fd !important;
+    }
+    .faq-toggle:hover .faq-icon,
+    .faq-item:hover .faq-icon {
+      color: #60a5fa !important;
+    }
+    .faq-content {
+      background-color: #0c172b !important;
+      color: #cbd5e1 !important;
+    }
+
+    /* Footer policy links contrast */
+    .footer-links a,
+    .footer-policy-link {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.15s ease-in-out;
+    }
+    .footer-links a:hover,
+    .footer-policy-link:hover {
+      color: #60a5fa !important;
+      text-decoration: underline;
+    }
+
+    /* =========================================================================
+       DAY MODE (LIGHT THEME) HIGH CONTRAST & VISIBILITY OVERRIDES
+       ========================================================================= */
+    body.light-theme,
+    body[data-theme="light"] {
+      background-color: #f1f5f9 !important;
+      color: #0f172a !important;
+    }
+    body.light-theme header,
+    body[data-theme="light"] header,
+    body.light-theme aside,
+    body[data-theme="light"] aside,
+    body.light-theme .bg-brand-panel,
+    body[data-theme="light"] .bg-brand-panel {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+    }
+    body.light-theme .bg-brand-card,
+    body[data-theme="light"] .bg-brand-card {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+    body.light-theme .text-slate-200,
+    body[data-theme="light"] .text-slate-200,
+    body.light-theme .text-slate-300,
+    body[data-theme="light"] .text-slate-300,
+    body.light-theme .text-white,
+    body[data-theme="light"] .text-white {
+      color: #0f172a !important;
+    }
+    body.light-theme .text-slate-400,
+    body[data-theme="light"] .text-slate-400,
+    body.light-theme .text-slate-500,
+    body[data-theme="light"] .text-slate-500 {
+      color: #475569 !important;
+    }
+    body.light-theme #canvasStageOuter,
+    body[data-theme="light"] #canvasStageOuter {
+      background-color: #e2e8f0 !important;
+    }
+    body.light-theme .hero-section,
+    body[data-theme="light"] .hero-section {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+    }
+    body.light-theme footer,
+    body[data-theme="light"] footer {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+    }
+    body.light-theme .seo-section,
+    body[data-theme="light"] .seo-section {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+    }
+
+    /* Slider Titles, Target File Size & Value Badge High Contrast in Day Mode */
+    body.light-theme #singleExamModeContainer,
+    body[data-theme="light"] #singleExamModeContainer {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+    }
+    body.light-theme #singleExamModeContainer span,
+    body[data-theme="light"] #singleExamModeContainer span,
+    body.light-theme #singleExamModeContainer label,
+    body[data-theme="light"] #singleExamModeContainer label,
+    body.light-theme #targetKbDisplay,
+    body[data-theme="light"] #targetKbDisplay,
+    body.light-theme #kbSliderVal,
+    body[data-theme="light"] #kbSliderVal,
+    body.light-theme .target-size-label,
+    body[data-theme="light"] .target-size-label,
+    body.light-theme .target-size-val,
+    body[data-theme="light"] .target-size-val,
+    body.light-theme .slider-label,
+    body[data-theme="light"] .slider-label,
+    body.light-theme .slider-title-row label,
+    body[data-theme="light"] .slider-title-row label,
+    body.light-theme .slider-title-row span,
+    body[data-theme="light"] .slider-title-row span {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+
+    /* =========================================================================
+       FIX 2: DAY MODE (LIGHT THEME) VIEWPORT ZOOM CONTROLS CRISP CONTRAST
+       ========================================================================= */
+    body.light-theme #canvasZoomGroup,
+    body[data-theme="light"] #canvasZoomGroup {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+    }
+    body.light-theme #canvasZoomOutBtn,
+    body[data-theme="light"] #canvasZoomOutBtn,
+    body.light-theme #canvasZoomInBtn,
+    body[data-theme="light"] #canvasZoomInBtn,
+    body.light-theme #canvasZoomResetBtn,
+    body[data-theme="light"] #canvasZoomResetBtn {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+    body.light-theme #canvasZoomOutBtn:hover,
+    body[data-theme="light"] #canvasZoomOutBtn:hover,
+    body.light-theme #canvasZoomInBtn:hover,
+    body[data-theme="light"] #canvasZoomInBtn:hover,
+    body.light-theme #canvasZoomResetBtn:hover,
+    body[data-theme="light"] #canvasZoomResetBtn:hover {
+      background-color: #e2e8f0 !important;
+      color: #1d4ed8 !important;
+    }
+
+    /* Top Privacy Badge */
+    body.light-theme .privacy-badge,
+    body[data-theme="light"] .privacy-badge,
+    body.light-theme #privacyBadge,
+    body[data-theme="light"] #privacyBadge {
+      background: #ecfdf5 !important;
+      color: #065f46 !important;
+      border: 1px solid #a7f3d0 !important;
+      font-weight: 600 !important;
+    }
+    body.light-theme .privacy-badge svg,
+    body[data-theme="light"] .privacy-badge svg,
+    body.light-theme #privacyBadge svg,
+    body[data-theme="light"] #privacyBadge svg {
+      stroke: #065f46 !important;
+    }
+
+    /* Top 18-Tools Preset Dropdown in Day Mode */
+    body.light-theme #top18ToolsSelect,
+    body[data-theme="light"] #top18ToolsSelect {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+    body.light-theme #top18ToolsSelect option,
+    body[data-theme="light"] #top18ToolsSelect option {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+    }
+
+    /* Dual Upload Tray Cards in Day Mode */
+    body.light-theme #addPersonBtn,
+    body[data-theme="light"] #addPersonBtn {
+      background-color: #ecfeff !important;
+      border-color: #06b6d4 !important;
+    }
+    body.light-theme #addPersonBtn span:first-of-type,
+    body[data-theme="light"] #addPersonBtn span:first-of-type {
+      color: #0891b2 !important;
+      font-weight: 700 !important;
+    }
+    body.light-theme #addPersonBtn span:last-of-type,
+    body[data-theme="light"] #addPersonBtn span:last-of-type {
+      color: #475569 !important;
+      font-weight: 500 !important;
+    }
+
+    body.light-theme #addDocumentBtn,
+    body[data-theme="light"] #addDocumentBtn {
+      background-color: #fffbeb !important;
+      border-color: #f59e0b !important;
+    }
+    body.light-theme #addDocumentBtn span:first-of-type,
+    body[data-theme="light"] #addDocumentBtn span:first-of-type {
+      color: #b45309 !important;
+      font-weight: 700 !important;
+    }
+    body.light-theme #addDocumentBtn span:last-of-type,
+    body[data-theme="light"] #addDocumentBtn span:last-of-type {
+      color: #475569 !important;
+      font-weight: 500 !important;
+    }
+
+    body.light-theme #dragDropZone,
+    body[data-theme="light"] #dragDropZone {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+    }
+    body.light-theme #dragDropZone p,
+    body[data-theme="light"] #dragDropZone p {
+      color: #334155 !important;
+      font-weight: 500 !important;
+    }
+
+    /* Left Tray Item Steppers in Day Mode */
+    body.light-theme .stepper-box,
+    body[data-theme="light"] .stepper-box {
+      background-color: #f1f5f9 !important;
+      border: 1px solid #cbd5e1 !important;
+    }
+    body.light-theme .stepper-btn,
+    body[data-theme="light"] .stepper-btn {
+      background: #e2e8f0 !important;
+      color: #0f172a !important;
+      border: 1px solid #cbd5e1 !important;
+      font-weight: 700 !important;
+      border-radius: 4px !important;
+      padding: 0 6px !important;
+    }
+    body.light-theme .stepper-btn:hover,
+    body[data-theme="light"] .stepper-btn:hover {
+      background: #cbd5e1 !important;
+      color: #000000 !important;
+    }
+    body.light-theme .stepper-val,
+    body[data-theme="light"] .stepper-val {
+      color: #0f172a !important;
+      font-weight: 700 !important;
+    }
+
+    /* Right Panel Orientation Buttons in Day Mode */
+    body.light-theme .orientation-btn-group,
+    body[data-theme="light"] .orientation-btn-group {
+      background-color: #e2e8f0 !important;
+      border-color: #cbd5e1 !important;
+    }
+    body.light-theme .btn-toggle,
+    body[data-theme="light"] .btn-toggle {
+      background: #e2e8f0 !important;
+      color: #334155 !important;
+      border: 1px solid #cbd5e1 !important;
+      font-weight: 600 !important;
+    }
+    body.light-theme .btn-toggle.active,
+    body[data-theme="light"] .btn-toggle.active {
+      background: #2563eb !important;
+      color: #ffffff !important;
+      border-color: #2563eb !important;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1) !important;
+    }
+
+    /* Item Calibration Control Box in Day Mode */
+    body.light-theme #calibrationCenterPanel,
+    body[data-theme="light"] #calibrationCenterPanel {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+    }
+    body.light-theme #calibrationCenterPanel label,
+    body[data-theme="light"] #calibrationCenterPanel label,
+    body.light-theme #calibrationCenterPanel span,
+    body[data-theme="light"] #calibrationCenterPanel span,
+    body.light-theme #calibrationCenterPanel .text-slate-300,
+    body[data-theme="light"] #calibrationCenterPanel .text-slate-300,
+    body.light-theme #calibrationCenterPanel .text-slate-400,
+    body[data-theme="light"] #calibrationCenterPanel .text-slate-400 {
+      color: #0f172a !important;
+    }
+    body.light-theme #calibrationCenterPanel .text-slate-500,
+    body[data-theme="light"] #calibrationCenterPanel .text-slate-500 {
+      color: #475569 !important;
+    }
+    body.light-theme #calibrationCenterPanel .text-cyan-400,
+    body[data-theme="light"] #calibrationCenterPanel .text-cyan-400 {
+      color: #0284c7 !important;
+      font-weight: 700 !important;
+    }
+    body.light-theme #calibrationCenterPanel .font-mono,
+    body[data-theme="light"] #calibrationCenterPanel .font-mono {
+      color: #0284c7 !important;
+      font-weight: 700 !important;
+    }
+    body.light-theme #calibrationCenterPanel button:not(.bg-color-btn),
+    body[data-theme="light"] #calibrationCenterPanel button:not(.bg-color-btn) {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+      font-weight: 600 !important;
+    }
+    body.light-theme #calibrationCenterPanel button:not(.bg-color-btn):hover,
+    body[data-theme="light"] #calibrationCenterPanel button:not(.bg-color-btn):hover {
+      background-color: #e2e8f0 !important;
+    }
+    body.light-theme #calibrationCenterPanel input[type=range],
+    body[data-theme="light"] #calibrationCenterPanel input[type=range],
+    body.light-theme aside input[type=range],
+    body[data-theme="light"] aside input[type=range] {
+      background-color: #cbd5e1 !important;
+    }
+    body.light-theme aside select,
+    body[data-theme="light"] aside select {
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
+      border-color: #cbd5e1 !important;
+    }
+    body.light-theme aside select option,
+    body[data-theme="light"] aside select option {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+    }
+
+    /* All sidebar labels & text dark inheritance in Day Mode */
+    body.light-theme aside label,
+    body[data-theme="light"] aside label,
+    body.light-theme aside span,
+    body[data-theme="light"] aside span,
+    body.light-theme aside p,
+    body[data-theme="light"] aside p,
+    body.light-theme .sidebar-left label,
+    body[data-theme="light"] .sidebar-left label,
+    body.light-theme .sidebar-left span,
+    body[data-theme="light"] .sidebar-left span,
+    body.light-theme .sidebar-right label,
+    body[data-theme="light"] .sidebar-right label,
+    body.light-theme .sidebar-right span,
+    body[data-theme="light"] .sidebar-right span {
+      color: #0f172a !important;
+    }
+    body.light-theme aside .text-slate-400,
+    body[data-theme="light"] aside .text-slate-400,
+    body.light-theme aside .text-slate-500,
+    body[data-theme="light"] aside .text-slate-500,
+    body.light-theme .sidebar-left .text-slate-400,
+    body[data-theme="light"] .sidebar-left .text-slate-400,
+    body.light-theme .sidebar-right .text-slate-400,
+    body[data-theme="light"] .sidebar-right .text-slate-400 {
+      color: #475569 !important;
+    }
+    body.light-theme aside .font-mono,
+    body[data-theme="light"] aside .font-mono,
+    body.light-theme #gapReadout,
+    body[data-theme="light"] #gapReadout,
+    body.light-theme #marginReadout,
+    body[data-theme="light"] #marginReadout,
+    body.light-theme #sheetDimLabel,
+    body[data-theme="light"] #sheetDimLabel {
+      color: #0284c7 !important;
+      font-weight: 700 !important;
+    }
+
+    /* Day Mode FAQ Accordion Contrast */
+    body.light-theme .faq-item,
+    body[data-theme="light"] .faq-item {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+    }
+    body.light-theme .faq-toggle,
+    body[data-theme="light"] .faq-toggle {
+      background-color: transparent !important;
+      color: #0f172a !important;
+    }
+    body.light-theme .faq-toggle:hover,
+    body[data-theme="light"] .faq-toggle:hover,
+    body.light-theme .faq-item:hover .faq-toggle,
+    body[data-theme="light"] .faq-item:hover .faq-toggle {
+      background-color: #f1f5f9 !important;
+      color: #1d4ed8 !important;
+    }
+    body.light-theme .faq-toggle:hover .faq-icon,
+    body[data-theme="light"] .faq-toggle:hover .faq-icon,
+    body.light-theme .faq-item:hover .faq-icon,
+    body[data-theme="light"] .faq-item:hover .faq-icon {
+      color: #2563eb !important;
+    }
+    body.light-theme .faq-content,
+    body[data-theme="light"] .faq-content {
+      background-color: #f8fafc !important;
+      color: #334155 !important;
+      border-color: #e2e8f0 !important;
+    }
+
+    /* Empty tray placeholder */
+    body.light-theme .empty-tray-placeholder,
+    body[data-theme="light"] .empty-tray-placeholder {
+      border-color: #cbd5e1 !important;
+      background-color: #f8fafc !important;
+    }
+    body.light-theme .empty-tray-placeholder p:first-child,
+    body[data-theme="light"] .empty-tray-placeholder p:first-child {
+      color: #0f172a !important;
+    }
+    body.light-theme .empty-tray-placeholder p:last-child,
+    body[data-theme="light"] .empty-tray-placeholder p:last-child {
+      color: #64748b !important;
+    }
+
+    /* Footer Legal Links Day Mode Contrast */
+    body.light-theme .footer-links a,
+    body[data-theme="light"] .footer-links a,
+    body.light-theme .footer-policy-link,
+    body[data-theme="light"] .footer-policy-link {
+      color: #475569 !important;
+      font-weight: 600 !important;
+    }
+    body.light-theme .footer-links a:hover,
+    body[data-theme="light"] .footer-links a:hover,
+    body.light-theme .footer-policy-link:hover,
+    body[data-theme="light"] .footer-policy-link:hover {
+      color: #2563eb !important;
+      text-decoration: underline !important;
+    }
+    body.light-theme .footer-dot,
+    body[data-theme="light"] .footer-dot {
+      color: #94a3b8 !important;
+    }
+
+    /* =========================================================================
+       PRINT ENGINE BLANK PAGE PREVIEW FIX (@media print)
+       ========================================================================= */
+    @media print {
+      @page {
+        size: auto;
+        margin: 0mm !important;
+      }
+      html, body {
+        width: 100% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        overflow: hidden !important;
+      }
+      header, nav, .hero-strip, .sidebar-left, .sidebar-right, 
+      .canvas-toolbar, .adsense-box, .seo-section-wrapper, 
+      footer, .modal-backdrop, .nudge-cluster, .tray-actions,
+      aside, #calibrationCenterPanel, .seo-section, .hero-section,
+      .no-print {
+        display: none !important;
+      }
+      .studio-container, .canvas-panel, .sheet-viewport, #canvasStageOuter {
+        display: block !important;
+        position: static !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+      }
+      #canvasSheetWrapper {
+        transform: none !important;
+        box-shadow: none !important;
+        border: none !important;
+        display: block !important;
+      }
+      #mainCanvas {
+        display: block !important;
+        position: fixed !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        max-height: 100% !important;
+        visibility: visible !important;
+        box-shadow: none !important;
+        page-break-inside: avoid !important;
+        page-break-after: avoid !important;
+      }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-brand-dark text-slate-100 min-h-screen flex flex-col font-sans antialiased select-none transition-colors duration-150">
+
+  <!-- ========================================================================= -->
+  <!-- TOP NAVIGATION BAR WITH 18-TOOLS LIST & NIGHT MODE TOGGLE BUTTON          -->
+  <!-- ========================================================================= -->
+  <header class="h-14 bg-brand-panel border-b border-brand-border px-4 flex items-center justify-between z-50 shrink-0 sticky top-0 no-print">
+    <!-- Left: Brand Logo & Privacy Pill -->
+    <div class="flex items-center space-x-3">
+      <div class="flex items-center space-x-2 cursor-pointer">
+        <div class="w-7 h-7 rounded-lg bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-400 font-black">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="7" height="7" x="3" y="3" rx="1"/>
+            <rect width="7" height="7" x="14" y="3" rx="1"/>
+            <rect width="7" height="7" x="14" y="14" rx="1"/>
+            <rect width="7" height="7" x="3" y="14" rx="1"/>
+          </svg>
+        </div>
+        <span class="text-base font-bold tracking-tight text-white flex items-center">
+          QuickPhoto<span class="text-white">Grid</span>
+        </span>
+      </div>
+
+      <!-- 100% Privacy Badge with high contrast support -->
+      <div id="privacyBadge" class="privacy-badge hidden sm:flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/40 text-emerald-400 text-xs font-medium">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+        <span>100% Client-Side Privacy</span>
+      </div>
+    </div>
+
+    <!-- Center: Prominent 18-Tools Standard Preset Selector -->
+    <div class="flex items-center z-[9999]">
+      <div class="relative">
+        <select id="top18ToolsSelect" class="appearance-none bg-[#0e1b33] hover:bg-[#1e293b] border border-brand-border text-white text-xs font-semibold rounded-lg pl-3 pr-8 py-2 outline-none focus:border-cyan-400 transition-colors shadow-lg cursor-pointer">
+          <option value="IN_PASSPORT" selected>🇮🇳 IN India Passport (35 × 45 mm)</option>
+          <option value="IN_PAN">🇮🇳 IN PAN Card Photo (25 × 35 mm)</option>
+          <option value="IN_STAMP">🇮🇳 IN Stamp Size (20 × 25 mm)</option>
+          <option value="US_VISA">🇺🇸 US Visa / Passport (51 × 51 mm / 2×2 in)</option>
+          <option value="CA_PASSPORT">🇨🇦 CA Canada Passport (50 × 70 mm)</option>
+          <option value="EU_SCHENGEN">🇪🇺 EU Schengen Visa (35 × 45 mm)</option>
+          <option value="UK_PASSPORT">🇬🇧 UK United Kingdom Passport (35 × 45 mm)</option>
+          <option value="AU_PASSPORT">🇦🇺 AU Australia Passport (35 × 45 mm)</option>
+          <option value="SG_PASSPORT">🇸🇬 SG Singapore Passport (35 × 45 mm)</option>
+          <option value="AE_VISA">🇦🇪 AE Dubai / UAE Visa (40 × 60 mm)</option>
+          <option value="MY_PASSPORT">🇲🇾 MY Malaysia Passport (35 × 50 mm)</option>
+          <option value="SA_VISA">🇸🇦 SA Saudi Arabia Visa (40 × 60 mm)</option>
+          <option value="JP_VISA">🇯🇵 JP Japan Visa (45 × 45 mm)</option>
+          <option value="CN_VISA">🇨🇳 CN China Visa (33 × 48 mm)</option>
+          <option value="NZ_PASSPORT">🇳🇿 NZ New Zealand Passport (35 × 45 mm)</option>
+          <option value="CR80_ID">🪪 Standard CR80 ID Card (85.6 × 54 mm)</option>
+          <option value="CUSTOM_DIM">📐 Custom Manual Dimensions</option>
+          <option value="EXAM_MODE">📝 Single Photo Online Exam Mode (UPSC/SSC under 50KB)</option>
+        </select>
+        <div class="absolute inset-y-0 right-0 flex items-center pr-2.5 pointer-events-none text-slate-300">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m6 9 6 6 6-6"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Header Actions + Theme Toggle -->
+    <div class="flex items-center space-x-2">
+      <button onclick="triggerPrint()" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold shadow-sm transition-colors">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 6 2 18 2 18 9"/>
+          <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+          <rect width="12" height="8" x="6" y="14"/>
+        </svg>
+        <span>Direct Print</span>
+      </button>
+
+      <!-- Save Sheet Button -->
+      <button id="topSaveSheetBtn" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow-sm transition-colors">
+        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span>Save Sheet (300 DPI)</span>
+      </button>
+
+      <!-- Night Mode Toggle Button immediately next to Save Sheet -->
+      <button id="themeToggleBtn" class="px-2.5 py-1.5 rounded-lg bg-brand-card hover:bg-brand-panelHover border border-brand-border text-slate-200 text-xs font-bold shadow-sm transition-colors flex items-center justify-center" title="Toggle Dark / Light Mode">
+        <span id="themeToggleIcon">🌙</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- WORKSPACE STAGE: BALANCED 4-COLUMN LAYOUT                                 -->
+  <!-- ========================================================================= -->
+  <div class="studio-container h-[calc(100vh-56px)] flex overflow-hidden shrink-0 no-print">
+
+    <!-- --------------------------------------------------------------------- -->
+    <!-- COLUMN 1: LEFT SIDEBAR - DUAL UPLOAD TRAY & ITEM QUEUE                -->
+    <!-- --------------------------------------------------------------------- -->
+    <aside class="sidebar-left w-80 bg-brand-panel border-r border-brand-border flex flex-col shrink-0 h-full max-h-[calc(100vh-56px)] overflow-y-auto">
+      <div class="p-3.5 flex-1 space-y-3.5">
+        
+        <!-- Header -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2 text-slate-300">
+            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/>
+              <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/>
+              <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>
+            </svg>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-200">Dual Upload Tray</span>
+          </div>
+          <span id="queueItemCountBadge" class="text-[11px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700/60 font-medium">0 items</span>
+        </div>
+
+        <input type="file" id="portraitFileInput" accept="image/*" class="hidden">
+        <input type="file" id="docFileInput" accept="image/*" class="hidden">
+
+        <!-- Dual Upload Cards -->
+        <div class="grid grid-cols-2 gap-2">
+          <!-- Add Person Card -->
+          <div id="addPersonBtn" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-dashed border-cyan-500/40 bg-cyan-950/20 hover:bg-cyan-900/30 transition-all text-center group cursor-pointer">
+            <div class="w-6 h-6 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400 mb-1 group-hover:scale-105 transition-transform">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <line x1="19" x2="19" y1="8" y2="14"/>
+                <line x1="22" x2="16" y1="11" y2="11"/>
+              </svg>
+            </div>
+            <span class="text-xs font-semibold text-cyan-300">Add Person</span>
+            <span class="text-[10px] text-slate-400">Passport / Visa</span>
+          </div>
+
+          <!-- Add Document Card (Custom Freeform Cropping Modal) -->
+          <div id="addDocumentBtn" class="flex flex-col items-center justify-center p-2.5 rounded-xl border border-dashed border-amber-500/40 bg-amber-950/20 hover:bg-amber-900/30 transition-all text-center group cursor-pointer">
+            <div class="w-6 h-6 rounded-full bg-amber-500/10 flex items-center justify-center text-amber-400 mb-1 group-hover:scale-105 transition-transform">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 2v14a2 2 0 0 0 2 2h14"/>
+                <path d="M18 22V8a2 2 0 0 0-2-2H2"/>
+              </svg>
+            </div>
+            <span class="text-xs font-semibold text-amber-400">Add Document</span>
+            <span class="text-[10px] text-slate-400">Crop Aadhaar/PAN</span>
+          </div>
+        </div>
+
+        <!-- Drag & Drop Zone -->
+        <div id="dragDropZone" class="p-2.5 rounded-lg border border-dashed border-slate-700/80 bg-brand-card/60 text-center hover:border-cyan-500/50 transition-colors cursor-pointer">
+          <p class="text-[11px] text-slate-400">Drag & drop portrait or document photos here</p>
+        </div>
+
+        <!-- Uploaded Items List -->
+        <div id="queueListContainer" class="space-y-2 max-h-[300px] overflow-y-auto pr-0.5">
+          <!-- Populated dynamically (starts completely empty) -->
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- --------------------------------------------------------------------- -->
+    <!-- COLUMN 2 & 3: CENTER RE-ALIGNED PREVIEW & ITEM CALIBRATION PANEL      -->
+    <!-- --------------------------------------------------------------------- -->
+    <div class="flex-1 flex flex-col bg-[#050b17] overflow-hidden relative">
+      
+      <!-- Top Canvas Information Bar -->
+      <div class="canvas-toolbar h-11 px-5 border-b border-brand-border bg-brand-panel/60 flex items-center justify-between shrink-0 no-print">
+        <div class="flex items-center space-x-2">
+          <!-- Packed Badge -->
+          <div class="flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-950/40 border border-cyan-800/40 text-cyan-300 text-xs font-medium">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="canvasSummaryLabel" class="font-medium">0 Photos & 0 ID Cards Packed</span>
+          </div>
+          <span id="sheetDimLabel" class="text-xs text-slate-500 font-mono">A4 (210×297mm)</span>
+        </div>
+
+        <!-- Toolbar Right: Zoom Controls and Clear All Canvas -->
+        <div class="flex items-center space-x-2">
+          <!-- Canvas Viewport Zoom Controller (Fix 2 & 3: High contrast in Day Mode, scale 50% to 200%) -->
+          <div id="canvasZoomGroup" class="flex items-center bg-[#1e293b] border border-[#334155] rounded-lg p-0.5 space-x-1">
+            <button id="canvasZoomOutBtn" type="button" class="px-2 py-0.5 text-xs font-semibold text-white hover:bg-slate-700 rounded transition-colors" title="Zoom Out (Down to 50%)">−</button>
+            <button id="canvasZoomResetBtn" type="button" class="px-2 py-0.5 text-xs font-semibold text-white hover:bg-slate-700 rounded font-mono transition-colors" title="Reset Zoom to 100%">100%</button>
+            <button id="canvasZoomInBtn" type="button" class="px-2 py-0.5 text-xs font-semibold text-white hover:bg-slate-700 rounded transition-colors" title="Zoom In (Up to 200%)">+</button>
+          </div>
+
+          <button id="clearAllCanvasBtn" class="flex items-center space-x-1.5 px-3 py-1 rounded-lg border border-red-500/30 text-red-400 hover:bg-red-500/10 text-xs font-medium transition-colors">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 6h18"/>
+              <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+              <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+            </svg>
+            <span>Clear All Canvas</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Split Stage: Sheet Shifted Left + Calibration in the Empty Space -->
+      <div class="flex-1 flex overflow-hidden">
+
+        <!-- SUB-COLUMN 2A: RE-ALIGNED PREVIEW CANVAS WITH ZOOM TRANSFORM CONTAINER -->
+        <div id="canvasStageOuter" class="flex-1 p-3 flex items-start justify-center overflow-auto canvas-panel sheet-viewport" style="max-height: calc(100vh - 120px);">
+          <div id="canvasSheetWrapper" class="relative bg-white shadow-[0_20px_50px_-15px_rgba(0,0,0,0.85)] border border-slate-700/60 overflow-hidden flex items-center justify-center shrink-0 transition-transform duration-100 ease-out" style="transform-origin: top center; max-height: 100%;">
+            <canvas id="mainCanvas" class="block object-contain" style="max-height: calc(100vh - 140px); max-width: 100%; width: auto; height: auto;"></canvas>
+          </div>
+        </div>
+
+        <!-- SUB-COLUMN 2B: "3. ITEM CALIBRATION" IN EMPTY SPACE -->
+        <div id="calibrationCenterPanel" class="w-[325px] bg-brand-panel/95 border-l border-brand-border p-3.5 overflow-y-auto shrink-0 flex flex-col space-y-3 no-print">
+          <div class="flex items-center justify-between pb-1 border-b border-brand-border">
+            <div class="flex items-center space-x-1.5">
+              <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+              <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">3. Item Calibration</span>
+            </div>
+            <span id="activeItemNameBadge" class="text-[10px] text-slate-300 font-semibold truncate max-w-[130px]">None Selected</span>
+          </div>
+
+          <!-- Multiple Background Colors Swatches Palette -->
+          <div class="space-y-1">
+            <label class="text-[11px] text-slate-400 block font-medium">Photo Background Palette</label>
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <button data-color="#ffffff" title="Pure White" class="bg-color-btn w-6 h-6 rounded-full border-2 border-cyan-400 bg-white cursor-pointer shadow-sm"></button>
+              <button data-color="#f1f5f9" title="Light Gray" class="bg-color-btn w-6 h-6 rounded-full border border-slate-600 bg-slate-100 cursor-pointer shadow-sm"></button>
+              <button data-color="#c8ddf2" title="Passport Light Blue" class="bg-color-btn w-6 h-6 rounded-full border border-slate-600 bg-[#c8ddf2] cursor-pointer shadow-sm"></button>
+              <button data-color="#1e3a8a" title="Studio Navy Blue" class="bg-color-btn w-6 h-6 rounded-full border border-slate-600 bg-[#1e3a8a] cursor-pointer shadow-sm"></button>
+              <button data-color="#fef3c7" title="Cream / Off-White" class="bg-color-btn w-6 h-6 rounded-full border border-slate-600 bg-[#fef3c7] cursor-pointer shadow-sm"></button>
+              <button data-color="transparent" title="Original / Transparent" class="bg-color-btn w-6 h-6 rounded-full border border-slate-600 bg-slate-800 text-[10px] font-bold text-slate-400 flex items-center justify-center cursor-pointer shadow-sm">✕</button>
+              <label title="Custom Color Picker" class="w-6 h-6 rounded-full border border-slate-600 overflow-hidden cursor-pointer relative flex items-center justify-center bg-slate-800">
+                <input type="color" id="customBgColorInput" value="#ffffff" class="opacity-0 absolute inset-0 cursor-pointer">
+                <span class="text-[10px]">🎨</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- INNER ZOOM -->
+          <div class="space-y-1">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-300 font-medium">Inner Zoom (Crop Framing)</span>
+              <span id="innerZoomVal" class="font-mono text-cyan-400 text-xs">100%</span>
+            </div>
+            <input type="range" id="innerZoomSlider" min="50" max="250" value="100" class="w-full cursor-pointer">
+          </div>
+
+          <!-- OUTER ZOOM -->
+          <div class="space-y-1">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-300 font-medium">Outer Zoom (Grid Footprint)</span>
+              <span id="outerZoomVal" class="font-mono text-cyan-400 text-xs">Outer Zoom: 100%</span>
+            </div>
+            <input type="range" id="outerZoomSlider" min="50" max="200" value="100" class="w-full cursor-pointer">
+          </div>
+
+          <!-- ISOLATED NUDGE FRAMING -->
+          <div class="space-y-1.5 pt-1">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-300 font-medium">Isolated Nudge Framing</span>
+              <button id="resetNudgeBtn" class="text-[10px] text-slate-400 hover:text-white px-1.5 py-0.5 rounded bg-slate-800 transition-colors">Reset</button>
+            </div>
+            <div class="grid grid-cols-2 gap-1.5">
+              <button id="nudgeUpBtn" class="py-1 px-2 rounded bg-brand-card hover:bg-brand-panelHover border border-brand-border text-xs text-slate-300 flex items-center justify-center space-x-1">▲ Up</button>
+              <button id="nudgeDownBtn" class="py-1 px-2 rounded bg-brand-card hover:bg-brand-panelHover border border-brand-border text-xs text-slate-300 flex items-center justify-center space-x-1">▼ Down</button>
+              <button id="nudgeLeftBtn" class="py-1 px-2 rounded bg-brand-card hover:bg-brand-panelHover border border-brand-border text-xs text-slate-300 flex items-center justify-center space-x-1">◀ Left</button>
+              <button id="nudgeRightBtn" class="py-1 px-2 rounded bg-brand-card hover:bg-brand-panelHover border border-brand-border text-xs text-slate-300 flex items-center justify-center space-x-1">▶ Right</button>
+            </div>
+            <span class="text-[10px] text-slate-500 block leading-tight">Shifts inner pixels; row baselines remain locked.</span>
+          </div>
+
+          <!-- Brightness & Contrast -->
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <div class="space-y-1">
+              <div class="flex justify-between text-[11px] text-slate-400">
+                <span>Brightness</span>
+                <span id="brightnessVal" class="font-mono text-slate-200">100%</span>
+              </div>
+              <input type="range" id="brightnessSlider" min="50" max="150" value="100" class="w-full cursor-pointer">
+            </div>
+            <div class="space-y-1">
+              <div class="flex justify-between text-[11px] text-slate-400">
+                <span>Contrast</span>
+                <span id="contrastVal" class="font-mono text-slate-200">100%</span>
+              </div>
+              <input type="range" id="contrastSlider" min="50" max="150" value="100" class="w-full cursor-pointer">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- --------------------------------------------------------------------- -->
+    <!-- COLUMN 4: RIGHT SIDEBAR - PAPER LAYOUT & GRID CONTROLS                -->
+    <!-- --------------------------------------------------------------------- -->
+    <aside class="sidebar-right w-[320px] bg-brand-panel border-l border-brand-border flex flex-col shrink-0 h-full max-h-[calc(100vh-56px)] overflow-y-auto">
+      <div class="p-3.5 space-y-3.5">
+        
+        <!-- SECTION 1: PAPER LAYOUT (LOCKED) -->
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-1.5">
+              <svg class="w-4 h-4 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                <polyline points="14 2 14 8 20 8"/>
+              </svg>
+              <span class="text-xs font-bold uppercase tracking-wider text-slate-200">Paper Layout</span>
+            </div>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-950/60 text-emerald-400 border border-emerald-800/40 font-medium">Sticky State</span>
+          </div>
+
+          <!-- Paper Select Dropdown -->
+          <div class="relative">
+            <select id="paperSizeSelect" class="w-full appearance-none bg-brand-card hover:bg-brand-panelHover border border-brand-border text-slate-200 text-xs font-medium rounded-lg px-3 py-2 outline-none focus:border-sky-500 transition-colors cursor-pointer">
+              <option value="A4" selected>A4 Sheet (210 × 297 mm)</option>
+              <option value="4x6">4 × 6 in (101.6 × 152.4 mm)</option>
+              <option value="5x7">5 × 7 in (127 × 177.8 mm)</option>
+              <option value="Letter">US Letter (215.9 × 279.4 mm)</option>
+              <option value="SINGLE_EXAM_MODE">Single Photo / Online Form Mode</option>
+            </select>
+            <div class="absolute inset-y-0 right-0 flex items-center px-2.5 pointer-events-none text-slate-400">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m6 9 6 6 6-6"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- DEDICATED SINGLE PHOTO EXAM PORTAL CONTROLS -->
+          <div id="singleExamModeContainer" class="hidden p-3 rounded-xl bg-slate-900 border border-cyan-800/50 space-y-2.5">
+            <div class="flex items-center justify-between text-xs font-bold text-cyan-300">
+              <span class="target-size-label">Online Exam Form KB Optimizer</span>
+              <span id="targetKbDisplay" class="font-mono text-emerald-400 font-bold">&lt; 50 KB</span>
+            </div>
+            
+            <div>
+              <div class="flex justify-between text-[11px] text-slate-400 mb-1">
+                <span class="target-size-label">Target Size Limit</span>
+                <span id="kbSliderVal" class="font-bold">50 KB</span>
+              </div>
+              <input type="range" id="targetKbSlider" min="10" max="100" step="5" value="50" class="w-full cursor-pointer">
+            </div>
+
+            <div class="grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <label class="text-[10px] text-slate-400">Width (mm / px)</label>
+                <input type="number" id="singleWidthInput" value="35" class="w-full bg-brand-card border border-brand-border rounded px-2 py-1 text-white">
+              </div>
+              <div>
+                <label class="text-[10px] text-slate-400">Height (mm / px)</label>
+                <input type="number" id="singleHeightInput" value="45" class="w-full bg-brand-card border border-brand-border rounded px-2 py-1 text-white">
+              </div>
+            </div>
+
+            <!-- FIX 1: UPDATE BUTTON TEXT STRICTLY TO "Download Form Photo (.jpg)" -->
+            <button id="downloadExamPhotoBtn" class="w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-bold flex items-center justify-center space-x-1.5 shadow transition-all">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download Form Photo (.jpg)</span>
+            </button>
+          </div>
+
+          <!-- Orientation Toggle with High Contrast .btn-toggle -->
+          <div id="orientationToggleWrapper" class="flex items-center justify-between text-xs pt-0.5">
+            <span class="text-slate-400">Orientation:</span>
+            <div class="orientation-btn-group flex bg-slate-900 p-0.5 rounded-lg border border-slate-700/80">
+              <button id="portraitToggleBtn" class="btn-toggle active px-3 py-1 rounded-md bg-sky-600 text-white font-semibold text-xs shadow-sm transition-all">Portrait</button>
+              <button id="landscapeToggleBtn" class="btn-toggle px-3 py-1 rounded-md text-slate-400 hover:text-white text-xs font-medium transition-all">Landscape</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: GRID & GUIDE CONTROLS -->
+        <div id="gridControlsSection" class="space-y-3 pt-2.5 border-t border-brand-border">
+          <div class="flex items-center space-x-1.5">
+            <svg class="w-4 h-4 text-sky-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="4" x2="20" y1="21" y2="21"/>
+              <line x1="4" x2="20" y1="3" y2="3"/>
+              <line x1="4" x2="20" y1="12" y2="12"/>
+              <line x1="8" x2="8" y1="21" y2="12"/>
+              <line x1="16" x2="16" y1="12" y2="3"/>
+            </svg>
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-200">Grid & Guide Controls</span>
+          </div>
+
+          <!-- Spacing Gap Slider -->
+          <div class="space-y-1">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-400">Photo Gap / Spacing</span>
+              <span id="gapReadout" class="font-mono text-slate-200 text-xs">2.0 mm</span>
+            </div>
+            <input type="range" id="gapSlider" min="0" max="10" step="0.5" value="2" class="w-full cursor-pointer">
+          </div>
+
+          <!-- Sheet Margin Slider -->
+          <div class="space-y-1">
+            <div class="flex justify-between items-center text-xs">
+              <span class="text-slate-400">Outer Sheet Margin</span>
+              <span id="marginReadout" class="font-mono text-slate-200 text-xs">11.0 mm</span>
+            </div>
+            <input type="range" id="marginSlider" min="2" max="25" step="0.5" value="11" class="w-full cursor-pointer">
+          </div>
+
+          <!-- Checkboxes -->
+          <div class="space-y-2 pt-0.5">
+            <label class="flex items-center justify-between text-xs text-slate-300 cursor-pointer">
+              <div class="flex items-center space-x-2">
+                <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="6" cy="6" r="3"/>
+                  <path d="M8.12 8.12 12 12"/>
+                  <path d="M20 4 8.12 15.88"/>
+                  <circle cx="6" cy="18" r="3"/>
+                  <path d="M14.8 14.8 20 20"/>
+                </svg>
+                <span>Dashed Cutting Lines</span>
+              </div>
+              <input type="checkbox" id="dashedGuidesCheck" checked class="w-4 h-4 rounded bg-slate-900 border-slate-700 text-sky-500 focus:ring-0 focus:ring-offset-0 cursor-pointer accent-sky-500">
+            </label>
+
+            <label class="flex items-center justify-between text-xs text-slate-300 cursor-pointer">
+              <div class="flex items-center space-x-2">
+                <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
+                  <line x1="16" x2="16" y1="2" y2="6"/>
+                  <line x1="8" x2="8" y1="2" y2="6"/>
+                  <line x1="3" x2="21" y1="10" y2="10"/>
+                </svg>
+                <span>Studio Batch Stamp</span>
+              </div>
+              <input type="checkbox" id="batchStampCheck" checked class="w-4 h-4 rounded bg-slate-900 border-slate-700 text-sky-500 focus:ring-0 focus:ring-offset-0 cursor-pointer accent-sky-500">
+            </label>
+          </div>
+        </div>
+
+        <!-- Action Buttons Section -->
+        <div class="space-y-2 pt-2 border-t border-brand-border">
+          <button onclick="triggerPrint()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center space-x-2 shadow-lg shadow-emerald-950/40 transition-all">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 6 2 18 2 18 9"/>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+              <rect width="12" height="8" x="6" y="14"/>
+            </svg>
+            <span>PRINT SHEET (Single Page)</span>
+          </button>
+
+          <div class="grid grid-cols-2 gap-2">
+            <button id="downloadPngBtn" class="flex items-center justify-center space-x-1.5 py-2 px-2 rounded-lg bg-brand-card hover:bg-brand-panelHover border border-brand-border text-slate-300 hover:text-white text-xs font-semibold transition-colors">
+              <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download PNG</span>
+            </button>
+            <button id="downloadJpegBtn" class="flex items-center justify-center space-x-1.5 py-2 px-2 rounded-lg bg-brand-card hover:bg-brand-panelHover border border-brand-border text-slate-300 hover:text-white text-xs font-semibold transition-colors">
+              <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download JPEG</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- CUSTOM DRAGGABLE DOCUMENT CROPPING MODAL (FREEFORM + CR80)                -->
+  <!-- ========================================================================= -->
+  <div id="cropModalBackdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[10000] hidden items-center justify-center p-4">
+    <div class="bg-brand-card border border-brand-borderLight w-full max-w-2xl rounded-2xl p-5 shadow-2xl flex flex-col space-y-4">
+      <div class="flex items-center justify-between border-b border-brand-border pb-3">
+        <div class="flex items-center space-x-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+          <h3 class="font-bold text-sm text-white">Custom Document Cropping System</h3>
+        </div>
+        <button id="closeCropModalBtn" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+      </div>
+
+      <!-- Ratio Presets -->
+      <div class="flex items-center space-x-2 text-xs">
+        <span class="text-slate-400">Aspect Ratio:</span>
+        <button data-ratio="free" class="crop-ratio-btn px-2.5 py-1 rounded bg-sky-600 text-white font-medium">Freeform</button>
+        <button data-ratio="cr80" class="crop-ratio-btn px-2.5 py-1 rounded bg-brand-panel text-slate-300 hover:text-white font-medium">CR80 ID (85.6×54)</button>
+        <button data-ratio="1:1" class="crop-ratio-btn px-2.5 py-1 rounded bg-brand-panel text-slate-300 hover:text-white font-medium">1:1 Square</button>
+        <button data-ratio="passport" class="crop-ratio-btn px-2.5 py-1 rounded bg-brand-panel text-slate-300 hover:text-white font-medium">Passport (35×45)</button>
+      </div>
+
+      <!-- Crop Viewport Container -->
+      <div id="cropContainer" class="relative w-full h-[360px] bg-slate-950 rounded-xl overflow-hidden flex items-center justify-center select-none">
+        <img id="cropSourceImg" class="max-w-full max-h-full object-contain pointer-events-none" alt="Crop Source">
+        
+        <!-- Draggable & Resizable Overlay Box -->
+        <div id="cropBox" class="absolute border-2 border-cyan-400 shadow-[0_0_0_9999px_rgba(0,0,0,0.6)] cursor-move" style="width: 240px; height: 151px; top: 90px; left: 160px;">
+          <!-- 4 Edge Handles -->
+          <div data-handle="top" class="crop-handle absolute -top-1.5 left-1/2 -translate-x-1/2 w-8 h-3 bg-cyan-400 rounded-sm cursor-ns-resize"></div>
+          <div data-handle="bottom" class="crop-handle absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-8 h-3 bg-cyan-400 rounded-sm cursor-ns-resize"></div>
+          <div data-handle="left" class="crop-handle absolute top-1/2 -left-1.5 -translate-y-1/2 w-3 h-8 bg-cyan-400 rounded-sm cursor-ew-resize"></div>
+          <div data-handle="right" class="crop-handle absolute top-1/2 -right-1.5 -translate-y-1/2 w-3 h-8 bg-cyan-400 rounded-sm cursor-ew-resize"></div>
+
+          <!-- 4 Corner Handles -->
+          <div data-handle="nw" class="crop-handle absolute -top-2 -left-2 w-4 h-4 bg-amber-400 rounded-sm cursor-nwse-resize shadow"></div>
+          <div data-handle="ne" class="crop-handle absolute -top-2 -right-2 w-4 h-4 bg-amber-400 rounded-sm cursor-nesw-resize shadow"></div>
+          <div data-handle="sw" class="crop-handle absolute -bottom-2 -left-2 w-4 h-4 bg-amber-400 rounded-sm cursor-nesw-resize shadow"></div>
+          <div data-handle="se" class="crop-handle absolute -bottom-2 -right-2 w-4 h-4 bg-amber-400 rounded-sm cursor-nwse-resize shadow"></div>
+        </div>
+      </div>
+
+      <!-- Footer Buttons -->
+      <div class="flex items-center justify-between pt-2 border-t border-brand-border text-xs">
+        <span class="text-slate-400">Drag handles to fit document boundaries cleanly without cutting barcodes.</span>
+        <div class="flex space-x-2">
+          <button id="cancelCropBtn" class="px-3.5 py-1.5 rounded-lg bg-brand-panel hover:bg-brand-panelHover text-slate-300">Cancel</button>
+          <button id="applyCropBtn" class="px-4 py-1.5 rounded-lg bg-cyan-600 hover:bg-cyan-500 font-bold text-white shadow">Apply Document Crop</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- DYNAMIC 1200-1500 WORDS SEO ARTICLE & 10 FAQS                             -->
+  <!-- ========================================================================= -->
+  <section class="seo-section bg-brand-dark border-t border-brand-border px-8 py-16 text-slate-300 leading-relaxed no-print">
+    <div class="max-w-4xl mx-auto space-y-8 text-sm sm:text-base">
+      
+      <!-- Dynamic Article Header -->
+      <header class="space-y-3">
+        <h1 id="seoArticleTitle" class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          Comprehensive Technical Biometric Guide: India Passport 35 × 45 mm Standards & Lab Printing
+        </h1>
+        <p id="seoArticleSubtitle" class="text-slate-400 text-sm leading-relaxed">
+          Official compliance guidelines, chin-to-crown proportions, zero-waste dynamic row packing, and 300 DPI high-fidelity raster printing for India.
+        </p>
+      </header>
+
+      <!-- Dynamic Article Content Body -->
+      <div id="seoDynamicBody" class="space-y-6">
+        <!-- Rendered dynamically via updateDynamicSeoContent() -->
+      </div>
+
+      <!-- Interactive 10 FAQs Container -->
+      <section class="space-y-4 pt-6 border-t border-brand-border">
+        <h2 id="seoFaqHeading" class="text-xl font-bold text-white">
+          Frequently Asked Questions (Interactive Biometric Guide)
+        </h2>
+        <div id="faqAccordionContainer" class="space-y-2.5">
+          <!-- 10 FAQs rendered dynamically via JS -->
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- FOOTER HERO SECTION & LEGAL PAGES WITH CONTACT FORM                       -->
+  <!-- ========================================================================= -->
+  <!-- Professional Hero Section -->
+  <section class="hero-section bg-[#050b17] border-t border-brand-border py-12 px-6 text-center no-print">
+    <div class="max-w-4xl mx-auto space-y-4">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-cyan-950/60 border border-cyan-800 text-cyan-400 text-xs font-semibold">
+        <span>⚡ Pure Client-Side Speed & Privacy</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
+        Zero Paper Waste. True 300 DPI Lab Output. 100% Privacy.
+      </h2>
+      <p class="text-slate-400 text-sm max-w-2xl mx-auto leading-relaxed">
+        QuickPhotoGrid empowers commercial photo studios, cyber centers, and individual applicants to format and print biometric passport photos and national identity cards with mathematical precision on any desktop inkjet or laser printer.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-4 pt-3 text-xs text-slate-300">
+        <div class="flex items-center space-x-1.5">
+          <span class="text-emerald-400 font-bold">✓</span>
+          <span>No Server Uploads</span>
+        </div>
+        <div class="flex items-center space-x-1.5">
+          <span class="text-emerald-400 font-bold">✓</span>
+          <span>18 Global Presets</span>
+        </div>
+        <div class="flex items-center space-x-1.5">
+          <span class="text-emerald-400 font-bold">✓</span>
+          <span>Zero Vertical Void Packing</span>
+        </div>
+        <div class="flex items-center space-x-1.5">
+          <span class="text-emerald-400 font-bold">✓</span>
+          <span>Strict 1-Page Print Lock</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- FOOTER LEGAL POLICY LINKS                                                 -->
+  <!-- ========================================================================= -->
+  <footer class="bg-brand-panel border-t border-brand-border py-8 px-6 text-center text-xs text-slate-400 no-print">
+    <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-2">
+        <span class="font-bold text-white">QuickPhotoGrid</span>
+        <span>&copy; 2025 All rights reserved.</span>
+      </div>
+      <div class="footer-links flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-medium">
+        <a href="#about" class="footer-policy-link" onclick="openPolicyModal('about'); return false;">About Us</a>
+        <span class="footer-dot text-slate-600">•</span>
+        <a href="#contact" class="footer-policy-link" onclick="openPolicyModal('contact'); return false;">Contact Us</a>
+        <span class="footer-dot text-slate-600">•</span>
+        <a href="#privacy" class="footer-policy-link" onclick="openPolicyModal('privacy'); return false;">Privacy Policy</a>
+        <span class="footer-dot text-slate-600">•</span>
+        <a href="#terms" class="footer-policy-link" onclick="openPolicyModal('terms'); return false;">Terms &amp; Conditions</a>
+        <span class="footer-dot text-slate-600">•</span>
+        <a href="#disclaimer" class="footer-policy-link" onclick="openPolicyModal('disclaimer'); return false;">Disclaimer</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Accessible Modal Popup for Legal Pages & Contact Form -->
+  <div id="legalModalBackdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[10000] hidden items-center justify-center p-4">
+    <div class="bg-brand-card border border-brand-borderLight w-full max-w-2xl rounded-2xl p-6 shadow-2xl flex flex-col space-y-4 max-h-[85vh] overflow-y-auto">
+      <div class="flex items-center justify-between border-b border-brand-border pb-3">
+        <h3 id="legalModalTitle" class="font-bold text-base text-white">About Us</h3>
+        <button id="closeLegalModalBtn" class="text-slate-400 hover:text-white text-lg font-bold">✕</button>
+      </div>
+
+      <div id="legalModalBody" class="text-xs sm:text-sm text-slate-300 leading-relaxed space-y-3">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT ENGINE: RE-ALIGNMENT, DYNAMIC PACKING & EXPORT LOGIC           -->
+  <!-- ========================================================================= -->
+  <script>
+    // System Constants
+    const MM_TO_INCH = 25.4;
+    const DPI = 300; // Laboratory print standard
+
+    const PAPER_FORMATS = {
+      'A4': { widthMm: 210.0, heightMm: 297.0, label: 'A4 (210×297mm)' },
+      '4x6': { widthMm: 101.6, heightMm: 152.4, label: '4×6" (101.6×152.4mm)' },
+      '5x7': { widthMm: 127.0, heightMm: 177.8, label: '5×7" (127×177.8mm)' },
+      'Letter': { widthMm: 215.9, heightMm: 279.4, label: 'Letter (215.9×279.4mm)' }
+    };
+
+    // 18 Standard Biometric Presets
+    const TOOLS_SPEC = {
+      'IN_PASSPORT': { name: 'India Passport', widthMm: 35, heightMm: 45, country: 'India', aspect: '7:9', headCoverage: '70% to 80%' },
+      'IN_PAN': { name: 'Indian PAN Card Photo', widthMm: 25, heightMm: 35, country: 'India', aspect: '5:7', headCoverage: 'Central facial focus' },
+      'IN_STAMP': { name: 'Indian Stamp Size', widthMm: 20, heightMm: 25, country: 'India', aspect: '4:5', headCoverage: 'Tight chest portrait' },
+      'US_VISA': { name: 'US Visa / Passport', widthMm: 51, heightMm: 51, country: 'United States', aspect: '1:1', headCoverage: '50% to 69% (1 - 1.375 in)' },
+      'CA_PASSPORT': { name: 'Canada Passport', widthMm: 50, heightMm: 70, country: 'Canada', aspect: '5:7', headCoverage: '31 mm to 36 mm head length' },
+      'EU_SCHENGEN': { name: 'EU Schengen Visa', widthMm: 35, heightMm: 45, country: 'European Union', aspect: '7:9', headCoverage: '32 mm to 36 mm' },
+      'UK_PASSPORT': { name: 'UK Passport', widthMm: 35, heightMm: 45, country: 'United Kingdom', aspect: '7:9', headCoverage: '29 mm to 34 mm head height' },
+      'AU_PASSPORT': { name: 'Australia Passport', widthMm: 35, heightMm: 45, country: 'Australia', aspect: '7:9', headCoverage: '32 mm to 36 mm' },
+      'SG_PASSPORT': { name: 'Singapore Passport', widthMm: 35, heightMm: 45, country: 'Singapore', aspect: '7:9', headCoverage: '25 mm to 35 mm head height' },
+      'AE_VISA': { name: 'Dubai / UAE Visa', widthMm: 40, heightMm: 60, country: 'United Arab Emirates', aspect: '2:3', headCoverage: '70% to 80%' },
+      'MY_PASSPORT': { name: 'Malaysia Passport', widthMm: 35, heightMm: 50, country: 'Malaysia', aspect: '7:10', headCoverage: '25 mm to 30 mm' },
+      'SA_VISA': { name: 'Saudi Arabia Visa', widthMm: 40, heightMm: 60, country: 'Saudi Arabia', aspect: '2:3', headCoverage: '70% to 80%' },
+      'JP_VISA': { name: 'Japan Visa', widthMm: 45, heightMm: 45, country: 'Japan', aspect: '1:1', headCoverage: '32 mm to 36 mm facial span' },
+      'CN_VISA': { name: 'China Visa', widthMm: 33, heightMm: 48, country: 'China', aspect: '11:16', headCoverage: '28 mm to 33 mm' },
+      'NZ_PASSPORT': { name: 'New Zealand Passport', widthMm: 35, heightMm: 45, country: 'New Zealand', aspect: '7:9', headCoverage: '32 mm to 36 mm head size' },
+      'CR80_ID': { name: 'Standard CR80 ID Card', widthMm: 85.6, heightMm: 54, country: 'International ISO/IEC 7810', aspect: '1.585:1', headCoverage: 'Full document card layout' },
+      'CUSTOM_DIM': { name: 'Custom Manual Dimensions', widthMm: 35, heightMm: 45, country: 'Global Custom', aspect: 'Custom', headCoverage: 'User configured' },
+      'EXAM_MODE': { name: 'Single Photo Online Exam Mode', widthMm: 35, heightMm: 45, country: 'Govt Competitive Portals', aspect: '7:9', headCoverage: 'Strict < 50 KB ceiling' }
+    };
+
+    // State Store (Starts completely empty)
+    const state = {
+      currentToolKey: 'IN_PASSPORT',
+      paperSize: 'A4',
+      orientation: 'portrait',
+      marginMm: 11.0,
+      gapMm: 2.0,
+      showCutLines: true,
+      showStamp: true,
+      activeItemId: null,
+      items: [],
+      isSingleExamMode: false,
+      singleExamTargetKb: 50,
+      theme: localStorage.getItem('qpg_theme') || 'dark',
+      canvasZoomScale: 1.0 // Canvas Preview Viewport Zoom Factor
+    };
+
+    function mmToPx(mm) {
+      return (mm / MM_TO_INCH) * DPI;
+    }
+
+    // Item Creation Helper
+    function createItem(imgObj, name, widthMm, heightMm, copies = 5, isDoc = false) {
+      return {
+        id: 'item_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+        name: name || (isDoc ? 'ID Document' : 'Person 1'),
+        subtitle: isDoc ? 'Identity Document' : 'Passport Portrait',
+        img: imgObj,
+        widthMm: widthMm || 35.0,
+        heightMm: heightMm || 45.0,
+        copies: copies,
+        innerZoom: 100,
+        outerZoom: 100,
+        nudgeX: 0,
+        nudgeY: 0,
+        brightness: 100,
+        contrast: 100,
+        bgColor: '#ffffff',
+        locked: false
+      };
+    }
+
+    function getActiveItem() {
+      return state.items.find(it => it.id === state.activeItemId) || state.items[0] || null;
+    }
+
+    // Canvas DOM & Readouts
+    const mainCanvas = document.getElementById('mainCanvas');
+    const ctx = mainCanvas.getContext('2d', { alpha: false });
+    const canvasSummaryLabel = document.getElementById('canvasSummaryLabel');
+    const sheetDimLabel = document.getElementById('sheetDimLabel');
+    const queueListContainer = document.getElementById('queueListContainer');
+    const queueItemCountBadge = document.getElementById('queueItemCountBadge');
+
+    // Canvas Viewport Zoom References
+    const canvasSheetWrapper = document.getElementById('canvasSheetWrapper');
+    const canvasZoomInBtn = document.getElementById('canvasZoomInBtn');
+    const canvasZoomOutBtn = document.getElementById('canvasZoomOutBtn');
+    const canvasZoomResetBtn = document.getElementById('canvasZoomResetBtn');
+
+    // FIX 3: EXPAND VIEWPORT ZOOM SCALE TO 200% (min: 0.5, max: 2.0, step: 0.1)
+    function applyCanvasPreviewZoom(scale) {
+      state.canvasZoomScale = Math.min(2.0, Math.max(0.5, Math.round(scale * 10) / 10));
+      canvasSheetWrapper.style.transform = `scale(${state.canvasZoomScale})`;
+      canvasZoomResetBtn.textContent = `${Math.round(state.canvasZoomScale * 100)}%`;
+    }
+
+    // =========================================================================
+    // DYNAMIC ZERO-GAP ROW PACKING MATH
+    // =========================================================================
+    function renderCanvas() {
+      if (state.isSingleExamMode) {
+        renderSingleExamCanvas();
+        return;
+      }
+
+      const paper = PAPER_FORMATS[state.paperSize] || PAPER_FORMATS['A4'];
+      let sheetWidthMm = paper.widthMm;
+      let sheetHeightMm = paper.heightMm;
+
+      if (state.orientation === 'landscape') {
+        sheetWidthMm = Math.max(paper.widthMm, paper.heightMm);
+        sheetHeightMm = Math.min(paper.widthMm, paper.heightMm);
+      } else {
+        sheetWidthMm = Math.min(paper.widthMm, paper.heightMm);
+        sheetHeightMm = Math.max(paper.widthMm, paper.heightMm);
+      }
+
+      const canvasWidth = Math.round(mmToPx(sheetWidthMm));
+      const canvasHeight = Math.round(mmToPx(sheetHeightMm));
+
+      mainCanvas.width = canvasWidth;
+      mainCanvas.height = canvasHeight;
+
+      // Pure White Studio Base Paper
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
+      const marginPx = mmToPx(state.marginMm);
+      const gapPx = mmToPx(state.gapMm);
+
+      let currentX = marginPx;
+      let currentY = marginPx;
+      let currentRowHeight = 0;
+      let itemsInRow = 0;
+      let totalPhotos = 0;
+      let totalDocs = 0;
+
+      // Flatten items according to copy count
+      const flatList = [];
+      state.items.forEach(item => {
+        const outerScale = (item.outerZoom || 100) / 100;
+        const effectiveW = item.widthMm * outerScale;
+        const effectiveH = item.heightMm * outerScale;
+        const wPx = mmToPx(effectiveW);
+        const hPx = mmToPx(effectiveH);
+
+        if (item.widthMm > 60 || item.heightMm > 50) {
+          totalDocs += item.copies;
+        } else {
+          totalPhotos += item.copies;
+        }
+
+        for (let c = 0; c < item.copies; c++) {
+          flatList.push({ itemRef: item, widthPx: wPx, heightPx: hPx });
+        }
+      });
+
+      // Strict Dynamic Row Baseline Math
+      flatList.forEach((entry) => {
+        if (itemsInRow > 0 && (currentX + entry.widthPx) > (canvasWidth - marginPx + 0.5)) {
+          currentY = currentY + currentRowHeight + gapPx;
+          currentX = marginPx;
+          currentRowHeight = 0;
+          itemsInRow = 0;
+        }
+
+        if ((currentY + entry.heightPx) <= (canvasHeight - marginPx + 2)) {
+          drawItemInstance(entry.itemRef, currentX, currentY, entry.widthPx, entry.heightPx);
+          
+          if (entry.heightPx > currentRowHeight) {
+            currentRowHeight = entry.heightPx;
+          }
+
+          currentX += entry.widthPx + gapPx;
+          itemsInRow++;
+        }
+      });
+
+      canvasSummaryLabel.textContent = `${totalPhotos} Photos & ${totalDocs} ID Cards Packed`;
+      sheetDimLabel.textContent = `${paper.label}`;
+    }
+
+    // Render single item with background replacement, inner zoom, and isolated nudge
+    function drawItemInstance(item, x, y, widthPx, heightPx) {
+      ctx.save();
+
+      ctx.beginPath();
+      ctx.rect(x, y, widthPx, heightPx);
+      ctx.clip();
+
+      if (item.bgColor && item.bgColor !== 'transparent') {
+        ctx.fillStyle = item.bgColor;
+        ctx.fillRect(x, y, widthPx, heightPx);
+      } else {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(x, y, widthPx, heightPx);
+      }
+
+      ctx.filter = `brightness(${item.brightness}%) contrast(${item.contrast}%)`;
+
+      const img = item.img;
+      const innerScale = (item.innerZoom / 100);
+      const frameRatio = widthPx / heightPx;
+      const imgRatio = img.width / img.height;
+
+      let drawW, drawH;
+      if (imgRatio > frameRatio) {
+        drawH = heightPx * innerScale;
+        drawW = drawH * imgRatio;
+      } else {
+        drawW = widthPx * innerScale;
+        drawH = drawW / imgRatio;
+      }
+
+      const nudgePxX = mmToPx(item.nudgeX);
+      const nudgePxY = mmToPx(item.nudgeY);
+
+      const drawX = x + (widthPx - drawW) / 2 + nudgePxX;
+      const drawY = y + (heightPx - drawH) / 2 + nudgePxY;
+
+      ctx.drawImage(img, drawX, drawY, drawW, drawH);
+      ctx.restore();
+
+      if (state.showCutLines) {
+        ctx.save();
+        ctx.strokeStyle = '#94a3b8';
+        ctx.lineWidth = Math.max(1, mmToPx(0.2));
+        ctx.setLineDash([mmToPx(1.5), mmToPx(1.5)]);
+        ctx.strokeRect(x, y, widthPx, heightPx);
+        ctx.restore();
+      }
+
+      if (item.id === state.activeItemId) {
+        ctx.save();
+        ctx.strokeStyle = '#0284c7';
+        ctx.lineWidth = Math.max(1.5, mmToPx(0.35));
+        ctx.strokeRect(x, y, widthPx, heightPx);
+        ctx.restore();
+      }
+    }
+
+    // Render Canvas in Single Exam Mode
+    function renderSingleExamCanvas() {
+      const active = getActiveItem();
+      const wMm = parseFloat(document.getElementById('singleWidthInput').value) || 35;
+      const hMm = parseFloat(document.getElementById('singleHeightInput').value) || 45;
+
+      const canvasWidth = Math.round(mmToPx(wMm));
+      const canvasHeight = Math.round(mmToPx(hMm));
+
+      mainCanvas.width = canvasWidth;
+      mainCanvas.height = canvasHeight;
+
+      if (active) {
+        drawItemInstance(active, 0, 0, canvasWidth, canvasHeight);
+      } else {
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+      }
+
+      canvasSummaryLabel.textContent = `Single Photo Mode (${wMm} × ${hMm} mm)`;
+      sheetDimLabel.textContent = `< ${state.singleExamTargetKb} KB Mode`;
+    }
+
+    // Queue List UI Rendering with Clean Empty State
+    function renderQueue() {
+      queueListContainer.innerHTML = '';
+      queueItemCountBadge.textContent = `${state.items.length} item${state.items.length === 1 ? '' : 's'}`;
+
+      if (state.items.length === 0) {
+        queueListContainer.innerHTML = `
+          <div class="empty-tray-placeholder p-4 rounded-xl border border-dashed border-slate-700/60 text-center text-xs text-slate-400 bg-brand-card/30">
+            <p class="font-medium text-slate-300 mb-1">Tray is empty</p>
+            <p class="text-[11px] text-slate-500">Add portraits or documents above to begin layout.</p>
+          </div>
+        `;
+        syncCalibrationUI();
+        return;
+      }
+
+      state.items.forEach(item => {
+        const isActive = item.id === state.activeItemId;
+        const outerScale = (item.outerZoom || 100) / 100;
+        const dispW = (item.widthMm * outerScale).toFixed(1);
+        const dispH = (item.heightMm * outerScale).toFixed(1);
+
+        const card = document.createElement('div');
+        card.className = `item-card p-2 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
+          isActive ? 'bg-brand-card border-sky-500 shadow-sm active' : 'bg-brand-card/70 border-brand-border hover:border-brand-borderLight'
+        }`;
+
+        card.innerHTML = `
+          <div class="flex items-center space-x-2 min-w-0">
+            <div class="w-8 h-10 rounded bg-slate-800 overflow-hidden shrink-0 border border-slate-700">
+              <img src="${item.img.src}" alt="${item.name}" class="w-full h-full object-cover">
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center space-x-1">
+                <span class="text-xs font-semibold text-slate-200 truncate">${item.name}</span>
+                <span class="text-[9px] px-1 py-0.2 rounded bg-sky-950 text-sky-400 border border-sky-800/60 font-mono">${dispW}×${dispH}</span>
+              </div>
+              <p class="text-[10px] text-slate-400 truncate">${item.subtitle}</p>
+            </div>
+          </div>
+
+          <div class="flex items-center space-x-1 shrink-0">
+            <!-- Stepper with High-Contrast classes -->
+            <div class="stepper-box flex items-center bg-slate-900 border border-slate-700/80 rounded px-1 py-0.5">
+              <button class="step-dec stepper-btn text-xs text-slate-400 hover:text-white px-1 font-bold">-</button>
+              <span class="stepper-val text-xs font-semibold text-white px-1.5 font-mono">${item.copies}</span>
+              <button class="step-inc stepper-btn text-xs text-slate-400 hover:text-white px-1 font-bold">+</button>
+            </div>
+
+            <!-- Lock Button -->
+            <button class="lock-btn p-1 text-xs rounded hover:bg-slate-800 transition-colors ${item.locked ? 'text-amber-400 font-bold' : 'text-slate-500'}" title="${item.locked ? 'Unlock item' : 'Lock settings'}">
+              ${item.locked ? '🔒' : '🔓'}
+            </button>
+
+            <!-- Red Delete Button -->
+            <button class="delete-btn p-1 text-xs text-slate-500 hover:text-red-400 rounded hover:bg-red-500/10 transition-colors" title="Delete card immediately">
+              🗑️
+            </button>
+          </div>
+        `;
+
+        card.addEventListener('click', (e) => {
+          if (!e.target.closest('.step-dec') && !e.target.closest('.step-inc') && !e.target.closest('.lock-btn') && !e.target.closest('.delete-btn')) {
+            state.activeItemId = item.id;
+            syncCalibrationUI();
+            renderQueue();
+            renderCanvas();
+          }
+        });
+
+        card.querySelector('.step-inc').addEventListener('click', (e) => {
+          e.stopPropagation();
+          item.copies++;
+          renderQueue();
+          renderCanvas();
+        });
+
+        card.querySelector('.step-dec').addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (item.copies > 1) {
+            item.copies--;
+            renderQueue();
+            renderCanvas();
+          }
+        });
+
+        card.querySelector('.lock-btn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          item.locked = !item.locked;
+          syncCalibrationUI();
+          renderQueue();
+        });
+
+        card.querySelector('.delete-btn').addEventListener('click', (e) => {
+          e.stopPropagation();
+          state.items = state.items.filter(it => it.id !== item.id);
+          if (state.activeItemId === item.id) {
+            state.activeItemId = state.items.length > 0 ? state.items[0].id : null;
+          }
+          syncCalibrationUI();
+          renderQueue();
+          renderCanvas();
+        });
+
+        queueListContainer.appendChild(card);
+      });
+
+      syncCalibrationUI();
+    }
+
+    // Sync Calibration Panel UI
+    function syncCalibrationUI() {
+      const active = getActiveItem();
+      const panel = document.getElementById('calibrationCenterPanel');
+      const activeItemNameBadge = document.getElementById('activeItemNameBadge');
+
+      if (!active) {
+        panel.classList.add('opacity-40', 'pointer-events-none');
+        activeItemNameBadge.textContent = 'None Selected';
+        return;
+      }
+
+      if (active.locked) {
+        panel.classList.add('opacity-60', 'pointer-events-none');
+        activeItemNameBadge.textContent = `${active.name} (Locked 🔒)`;
+      } else {
+        panel.classList.remove('opacity-40', 'opacity-60', 'pointer-events-none');
+        activeItemNameBadge.textContent = active.name;
+      }
+
+      document.getElementById('innerZoomSlider').value = active.innerZoom;
+      document.getElementById('innerZoomVal').textContent = active.innerZoom + '%';
+
+      document.getElementById('outerZoomSlider').value = active.outerZoom || 100;
+      document.getElementById('outerZoomVal').textContent = `Outer Zoom: ${active.outerZoom || 100}%`;
+
+      document.getElementById('brightnessSlider').value = active.brightness;
+      document.getElementById('brightnessVal').textContent = active.brightness + '%';
+
+      document.getElementById('contrastSlider').value = active.contrast;
+      document.getElementById('contrastVal').textContent = active.contrast + '%';
+
+      document.querySelectorAll('.bg-color-btn').forEach(btn => {
+        if (btn.getAttribute('data-color') === active.bgColor) {
+          btn.classList.add('ring-2', 'ring-cyan-400');
+        } else {
+          btn.classList.remove('ring-2', 'ring-cyan-400');
+        }
+      });
+    }
+
+    // Custom Document Cropping Logic
+    const cropModalBackdrop = document.getElementById('cropModalBackdrop');
+    const cropSourceImg = document.getElementById('cropSourceImg');
+    const cropContainer = document.getElementById('cropContainer');
+    const cropBox = document.getElementById('cropBox');
+
+    let isDraggingCropBox = false;
+    let isResizingHandle = null;
+    let dragStartX = 0, dragStartY = 0;
+    let boxStartLeft = 0, boxStartTop = 0, boxStartWidth = 0, boxStartHeight = 0;
+    let activeCropRatio = 'free';
+
+    function openCustomCropper(fileOrImg) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        cropSourceImg.onload = () => {
+          cropModalBackdrop.classList.remove('hidden');
+          cropModalBackdrop.classList.add('flex');
+          cropBox.style.width = '240px';
+          cropBox.style.height = '151px';
+          cropBox.style.top = '90px';
+          cropBox.style.left = '160px';
+        };
+        cropSourceImg.src = e.target.result;
+      };
+      reader.readAsDataURL(fileOrImg);
+    }
+
+    cropBox.addEventListener('mousedown', (e) => {
+      if (e.target.classList.contains('crop-handle')) return;
+      isDraggingCropBox = true;
+      dragStartX = e.clientX;
+      dragStartY = e.clientY;
+      boxStartLeft = cropBox.offsetLeft;
+      boxStartTop = cropBox.offsetTop;
+      e.preventDefault();
+    });
+
+    document.querySelectorAll('.crop-handle').forEach(handle => {
+      handle.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+        isResizingHandle = handle.getAttribute('data-handle');
+        dragStartX = e.clientX;
+        dragStartY = e.clientY;
+        boxStartLeft = cropBox.offsetLeft;
+        boxStartTop = cropBox.offsetTop;
+        boxStartWidth = cropBox.offsetWidth;
+        boxStartHeight = cropBox.offsetHeight;
+        e.preventDefault();
+      });
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (isDraggingCropBox) {
+        const dx = e.clientX - dragStartX;
+        const dy = e.clientY - dragStartY;
+        const maxL = cropContainer.offsetWidth - cropBox.offsetWidth;
+        const maxT = cropContainer.offsetHeight - cropBox.offsetHeight;
+        cropBox.style.left = Math.max(0, Math.min(maxL, boxStartLeft + dx)) + 'px';
+        cropBox.style.top = Math.max(0, Math.min(maxT, boxStartTop + dy)) + 'px';
+      } else if (isResizingHandle) {
+        const dx = e.clientX - dragStartX;
+        const dy = e.clientY - dragStartY;
+
+        let newW = boxStartWidth;
+        let newH = boxStartHeight;
+        let newL = boxStartLeft;
+        let newT = boxStartTop;
+
+        if (isResizingHandle.includes('right')) newW = Math.max(40, boxStartWidth + dx);
+        if (isResizingHandle.includes('bottom')) newH = Math.max(40, boxStartHeight + dy);
+        if (isResizingHandle.includes('left')) {
+          const delta = Math.min(dx, boxStartWidth - 40);
+          newL = boxStartLeft + delta;
+          newW = boxStartWidth - delta;
+        }
+        if (isResizingHandle.includes('top')) {
+          const delta = Math.min(dy, boxStartHeight - 40);
+          newT = boxStartTop + delta;
+          newH = boxStartHeight - delta;
+        }
+
+        if (activeCropRatio === 'cr80') newH = newW / (85.6 / 54);
+        if (activeCropRatio === '1:1') newH = newW;
+        if (activeCropRatio === 'passport') newH = newW * (45 / 35);
+
+        cropBox.style.width = newW + 'px';
+        cropBox.style.height = newH + 'px';
+        cropBox.style.left = newL + 'px';
+        cropBox.style.top = newT + 'px';
+      }
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDraggingCropBox = false;
+      isResizingHandle = null;
+    });
+
+    document.querySelectorAll('.crop-ratio-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.crop-ratio-btn').forEach(b => b.className = "crop-ratio-btn px-2.5 py-1 rounded bg-brand-panel text-slate-300 hover:text-white font-medium");
+        btn.className = "crop-ratio-btn px-2.5 py-1 rounded bg-sky-600 text-white font-medium";
+        activeCropRatio = btn.getAttribute('data-ratio');
+        const currW = cropBox.offsetWidth;
+        if (activeCropRatio === 'cr80') cropBox.style.height = (currW / (85.6 / 54)) + 'px';
+        if (activeCropRatio === '1:1') cropBox.style.height = currW + 'px';
+        if (activeCropRatio === 'passport') cropBox.style.height = (currW * (45 / 35)) + 'px';
+      });
+    });
+
+    document.getElementById('closeCropModalBtn').addEventListener('click', () => cropModalBackdrop.classList.add('hidden'));
+    document.getElementById('cancelCropBtn').addEventListener('click', () => cropModalBackdrop.classList.add('hidden'));
+
+    document.getElementById('applyCropBtn').addEventListener('click', () => {
+      const img = cropSourceImg;
+      const contRect = cropContainer.getBoundingClientRect();
+      const imgRect = img.getBoundingClientRect();
+
+      const scaleX = img.naturalWidth / imgRect.width;
+      const scaleY = img.naturalHeight / imgRect.height;
+
+      const cropLeft = Math.max(0, (cropBox.offsetLeft - (imgRect.left - contRect.left)) * scaleX);
+      const cropTop = Math.max(0, (cropBox.offsetTop - (imgRect.top - contRect.top)) * scaleY);
+      const cropW = Math.min(img.naturalWidth - cropLeft, cropBox.offsetWidth * scaleX);
+      const cropH = Math.min(img.naturalHeight - cropTop, cropBox.offsetHeight * scaleY);
+
+      const offscreen = document.createElement('canvas');
+      offscreen.width = Math.max(1, cropW);
+      offscreen.height = Math.max(1, cropH);
+      const oCtx = offscreen.getContext('2d');
+      oCtx.drawImage(img, cropLeft, cropTop, cropW, cropH, 0, 0, offscreen.width, offscreen.height);
+
+      const croppedImg = new Image();
+      croppedImg.onload = () => {
+        let targetW = 85.6;
+        let targetH = 54.0;
+        if (activeCropRatio === 'free') {
+          targetW = 85.6;
+          targetH = targetW / (cropW / cropH);
+        } else if (activeCropRatio === '1:1') {
+          targetW = 51.0;
+          targetH = 51.0;
+        } else if (activeCropRatio === 'passport') {
+          targetW = 35.0;
+          targetH = 45.0;
+        }
+
+        const item = createItem(croppedImg, `ID Card ${state.items.length + 1}`, targetW, targetH, 2, true);
+        state.items.push(item);
+        state.activeItemId = item.id;
+        cropModalBackdrop.classList.add('hidden');
+        renderQueue();
+        renderCanvas();
+      };
+      croppedImg.src = offscreen.toDataURL('image/jpeg', 0.95);
+    });
+
+    // Dynamic SEO Content & Tool-Specific FAQs
+    function updateDynamicSeoContent(toolKey) {
+      const spec = TOOLS_SPEC[toolKey] || TOOLS_SPEC['IN_PASSPORT'];
+      document.getElementById('seoArticleTitle').textContent = `Complete Biometric & Sheet Packing Guide: ${spec.name} (${spec.widthMm} × ${spec.heightMm} mm)`;
+      document.getElementById('seoArticleSubtitle').textContent = `Official compliance guidelines, chin-to-crown proportions, zero-waste dynamic row packing, and 300 DPI high-fidelity raster printing for ${spec.country}.`;
+
+      const dynamicBody = document.getElementById('seoDynamicBody');
+      dynamicBody.innerHTML = `
+        <h2 class="text-xl font-bold text-white border-b border-brand-border pb-2">
+          Zero-Waste Photo & ID Document Sheet Packing Engine for ${spec.name}
+        </h2>
+        <p>
+          In professional imaging labs and commercial studio environments, handling <strong>${spec.name} (${spec.widthMm} × ${spec.heightMm} mm)</strong> requires uncompromising dimensional fidelity and maximum substrate efficiency. Standard commercial photo papers—such as Resin-Coated 4×6 inch and A4 studio media—often suffer up to 40% paper wastage under conventional printing utilities due to rigid grid arrangements that impose blanket height baselines across different item classes.
+        </p>
+        <p>
+          QuickPhotoGrid solves this consumable overhead through an asynchronous <strong>Dynamic Row Baseline Engine</strong>. When queuing multiple copies of ${spec.name} alongside larger document badges or miniature stamp portraits, vertical row spacing is calculated dynamically as <code>currentRowY = previousRowY + previousRowHeight + spacingGap</code>. This eliminates blank vertical bands and guarantees tight, lab-grade output.
+        </p>
+
+        <h3 class="text-lg font-semibold text-cyan-400 pt-2">
+          Preventing Consumable Photo Paper Waste in Studio Workflows
+        </h3>
+        <p>
+          Under traditional layouts, if an operator adds two copies of an ID document followed by four passport photos, legacy software applies the ID document height globally, generating vast dead spaces beneath the smaller photos. QuickPhotoGrid computes exact millimeter row heights on the fly. If Row 1 holds 45 mm passport portraits, Row 2 begins immediately at <code>margin + 45 mm + gap</code>. This dynamic packaging increases valid photo yield by up to 60% per sheet.
+        </p>
+
+        <h2 class="text-xl font-bold text-white border-b border-brand-border pb-2">
+          Official Biometric Dimensions & Proportions Comparison: ${spec.name}
+        </h2>
+        <p>
+          Consular officers and official immigration kiosks reject photographs that violate strict biometric margins. For <strong>${spec.country}</strong>, photographs must honor precise head height requirements and background neutralities:
+        </p>
+
+        <div class="overflow-x-auto rounded-xl border border-brand-border bg-brand-card">
+          <table class="w-full text-left text-xs sm:text-sm">
+            <thead class="bg-brand-panel text-slate-200 border-b border-brand-border">
+              <tr>
+                <th class="p-3">Standard Authority</th>
+                <th class="p-3">Physical Dimensions</th>
+                <th class="p-3">Aspect Ratio</th>
+                <th class="p-3">Facial / Biometric Coverage</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-brand-border text-slate-300">
+              <tr class="hover:bg-brand-panelHover/40">
+                <td class="p-3 font-semibold text-white">${spec.name} (${spec.country})</td>
+                <td class="p-3 font-mono text-cyan-300">${spec.widthMm} × ${spec.heightMm} mm</td>
+                <td class="p-3">${spec.aspect}</td>
+                <td class="p-3">${spec.headCoverage}</td>
+              </tr>
+              <tr class="hover:bg-brand-panelHover/40">
+                <td class="p-3 font-semibold text-white">India Passport Standard</td>
+                <td class="p-3 font-mono text-cyan-300">35 × 45 mm</td>
+                <td class="p-3">7:9</td>
+                <td class="p-3">70% to 80% (31 to 36 mm)</td>
+              </tr>
+              <tr class="hover:bg-brand-panelHover/40">
+                <td class="p-3 font-semibold text-white">US Visa (DS-160)</td>
+                <td class="p-3 font-mono text-cyan-300">51 × 51 mm (2×2 in)</td>
+                <td class="p-3">1:1</td>
+                <td class="p-3">50% to 69% (1 to 1.375 in)</td>
+              </tr>
+              <tr class="hover:bg-brand-panelHover/40">
+                <td class="p-3 font-semibold text-white">Standard CR80 ID Card</td>
+                <td class="p-3 font-mono text-cyan-300">85.6 × 54.0 mm</td>
+                <td class="p-3">1.585:1</td>
+                <td class="p-3">Full identification document card face</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2 class="text-xl font-bold text-white border-b border-brand-border pb-2">
+          Safe Document Cropping: Managing Sensitive Identification Cards
+        </h2>
+        <p>
+          When printing government cards (such as Aadhaar, PAN, or Driver's Licenses), automated face-detection cropping often clips crucial peripheral micro-text, QR codes, or security barcodes. QuickPhotoGrid provides an unconstrained custom cropping system with 8 draggable handles. Operators can freely preserve all functional machine-readable zones (MRZ) while ensuring pristine card rendering on the sheet.
+        </p>
+
+        <h2 class="text-xl font-bold text-white border-b border-brand-border pb-2">
+          Dual-Zoom Architecture: Precision Calibration with Inner & Outer Zoom
+        </h2>
+        <p>
+          Achieving international compliance requires decoupling portrait scale from card size. QuickPhotoGrid implements a <strong>Dual-Zoom Architecture</strong>:
+        </p>
+        <ul class="list-disc pl-6 space-y-2 text-slate-300">
+          <li><strong>Inner Zoom:</strong> Scales the subject's portrait within the locked physical boundary (e.g., dialing facial coverage to exactly ${spec.headCoverage}) without altering the card's millimeter footprint.</li>
+          <li><strong>Outer Zoom:</strong> Dynamically modulates the physical footprint on the canvas (50% to 200%), allowing custom oversized badges or miniature tokens while dynamically reflowing adjacent rows.</li>
+        </ul>
+
+        <h2 class="text-xl font-bold text-white border-b border-brand-border pb-2">
+          Single Photo Online Exam Application Mode (UPSC, SSC, BPSC, State Portals under 50KB)
+        </h2>
+        <p>
+          Competitive exam portals reject submissions if image payload exceeds 50 KB. QuickPhotoGrid includes a dedicated in-memory quantization optimizer. By stripping unnecessary EXIF data and executing iterative binary-search JPEG compression, candidates can instantly export compliant photos under 50 KB ready for portal upload.
+        </p>
+      `;
+
+      const faqList = [
+        { q: `1. How does QuickPhotoGrid eliminate vertical paper gaps when printing ${spec.name}?`, a: `The dynamic row baseline math calculates the subsequent row position strictly as nextRowY = currentRowY + currentRowItemHeight + spacingGap. There are no phantom padding envelopes or global row locks.` },
+        { q: `2. What is the functional difference between Inner Zoom and Outer Zoom for ${spec.name}?`, a: `Inner Zoom zooms the portrait inside the fixed ${spec.widthMm}×${spec.heightMm} mm frame to fulfill biometric head coverage. Outer Zoom scales the entire physical item boundary on the sheet itself.` },
+        { q: `3. How does the in-browser architecture guarantee 100% client-side privacy?`, a: `All image processing, cropping, and 300 DPI rasterization happen inside your web browser’s memory using HTML5 Canvas. No documents are transmitted to external cloud servers.` },
+        { q: `4. What are the official dimensions and head ratio for ${spec.name}?`, a: `The official size is ${spec.widthMm} × ${spec.heightMm} mm with an aspect ratio of ${spec.aspect} and required biometric facial coverage of ${spec.headCoverage}.` },
+        { q: `5. How can multiple family members' photos be combined on one sheet without overlap?`, a: `Add multiple persons in the Dual Upload Tray. Each person maintains independent copy counts and settings; the engine flows them cleanly across the sheet without overlaps.` },
+        { q: `6. How do I crop government identity cards without cutting off barcodes or details?`, a: `Use the "Add Document" button to open the custom cropping box with 8 draggable handles, or choose the CR80 preset to preserve all margins and barcodes.` },
+        { q: `7. What settings should I select to guarantee a strict 1-page print output?`, a: `Click "Direct Print" or "PRINT SHEET (Single Page)". The embedded @media print CSS locks @page margins to 0mm and suppresses blank second pages.` },
+        { q: `8. How does the single photo compression mode prepare images for competitive exam portals?`, a: `Select "Single Photo / Online Form Mode", adjust the slider to 50 KB, and download an optimized JPEG strictly under 50 KB compliant with government portal servers.` },
+        { q: `9. Which photo paper type and printer settings provide true lab-grade 300 DPI results?`, a: `Utilize Resin-Coated 200+ GSM Glossy photo paper. Set your printer media to "High Quality Photo Paper" and turn off automatic sharpening filters.` },
+        { q: `10. Can I adjust brightness, contrast, and background color for one individual without altering other cards?`, a: `Yes. Each queued item maintains its own isolated state object. Adjusting color palette, brightness, or zoom applies exclusively to that active card.` }
+      ];
+
+      const faqContainer = document.getElementById('faqAccordionContainer');
+      faqContainer.innerHTML = '';
+      faqList.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'faq-item rounded-xl border overflow-hidden';
+        div.innerHTML = `
+          <button class="faq-toggle w-full p-4 flex items-center justify-between text-left text-sm font-semibold transition-colors">
+            <span>${item.q}</span>
+            <span class="faq-icon text-cyan-400 text-lg transition-transform duration-200">+</span>
+          </button>
+          <div class="faq-content px-4 text-xs border-t border-brand-border/40">
+            ${item.a}
+          </div>
+        `;
+        div.querySelector('.faq-toggle').addEventListener('click', () => {
+          div.classList.toggle('open');
+        });
+        faqContainer.appendChild(div);
+      });
+    }
+
+    // Legal Policy Modal Logic & Content
+    const legalModalBackdrop = document.getElementById('legalModalBackdrop');
+    const legalModalTitle = document.getElementById('legalModalTitle');
+    const legalModalBody = document.getElementById('legalModalBody');
+    const closeLegalModalBtn = document.getElementById('closeLegalModalBtn');
+
+    const LEGAL_CONTENT = {
+      about: {
+        title: 'About QuickPhotoGrid Studio',
+        body: `
+          <p>QuickPhotoGrid was developed by senior imaging engineers to address the persistent problem of photo paper waste in commercial photography labs, digital kiosks, and cyber centers worldwide. Traditional desktop publishing programs and default operating system print dialogs utilize rigid CSS grid or table cells that waste up to 40% of photographic paper.</p>
+          <p>Our web platform is 100% free, runs entirely inside your browser, and produces laboratory-grade 300 DPI output for 18 international biometric standards. We do not require account creation, and your uploaded documents never leave your local device.</p>
+          <p>By balancing layout baselines dynamically, studios can comfortably fit passport portraits, visa photos, and identity card scans on a single paper sheet with zero vertical voids.</p>
+        `
+      },
+      privacy: {
+        title: 'Privacy Policy - 100% Client-Side Privacy Guarantee',
+        body: `
+          <p>At QuickPhotoGrid, we hold personal data privacy as an absolute priority. We recognize that users process sensitive identification cards, visas, passports, and personal biometric portraits.</p>
+          <p><strong>Zero Server Uploads:</strong> When you add images or documents to QuickPhotoGrid, they are decoded directly into your device's RAM via the HTML5 FileReader API. No image data, metadata, or coordinates are ever transmitted to our servers or third-party cloud systems.</p>
+          <p><strong>No Cookies & No Tracking:</strong> We do not employ tracking beacons or persistent personal cookies. When you close your browser tab, your working memory is cleared automatically.</p>
+          <p>All image transformations—including zooming, background color tinting, cropping, and 300 DPI rasterization—execute exclusively inside the client-side JavaScript V8 engine.</p>
+        `
+      },
+      terms: {
+        title: 'Terms & Conditions of Service',
+        body: `
+          <p>By accessing and utilizing QuickPhotoGrid, you agree to these operational terms. QuickPhotoGrid is provided as a client-side layout utility for personal, commercial, and professional studio applications.</p>
+          <p>Users are responsible for ensuring that biometric standards selected for specific embassies, passport offices, or government recruitment portals match current gazetted specifications. QuickPhotoGrid provides pre-calibrated geometric presets but does not guarantee consular approval if uploaded source portraits violate official lighting, expression, or dress code guidelines.</p>
+          <p>This software is provided "as-is", without warranties of any kind, either expressed or implied.</p>
+        `
+      },
+      disclaimer: {
+        title: 'Legal & Biometric Compliance Disclaimer',
+        body: `
+          <p>QuickPhotoGrid is an independent photographic utility and is not affiliated with, endorsed by, or sponsored by any government agency, passport authority, or state exam recruitment board (such as UPSC, SSC, ICAO, or US Department of State).</p>
+          <p>All standard preset dimensions (35x45mm, 51x51mm, CR80) are referenced from publicly gazetted standards. Users should verify that their printer resolution and paper substrate comply with their local authority requirements.</p>
+        `
+      },
+      contact: {
+        title: 'Contact QuickPhotoGrid Support Team',
+        body: `
+          <p class="text-xs text-slate-400">Have feedback, suggestions, or need custom studio integration? Send us a message directly:</p>
+          <form id="contactForm" class="space-y-3 pt-2">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Your Name</label>
+              <input type="text" id="contactName" required class="w-full bg-brand-panel border border-brand-border rounded-lg px-3 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Your Email</label>
+              <input type="email" id="contactEmail" required class="w-full bg-brand-panel border border-brand-border rounded-lg px-3 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Subject</label>
+              <input type="text" id="contactSubject" required class="w-full bg-brand-panel border border-brand-border rounded-lg px-3 py-1.5 text-xs text-white outline-none focus:border-cyan-400">
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Message</label>
+              <textarea id="contactMessage" rows="3" required class="w-full bg-brand-panel border border-brand-border rounded-lg px-3 py-1.5 text-xs text-white outline-none focus:border-cyan-400"></textarea>
+            </div>
+            <div id="contactSuccessMsg" class="hidden text-xs text-emerald-400 font-bold">
+              ✓ Thank you! Your message has been received. Our team will respond shortly.
+            </div>
+            <button type="submit" class="w-full py-2 bg-cyan-600 hover:bg-cyan-500 font-bold text-white rounded-lg text-xs transition-colors shadow">
+              Send Message
+            </button>
+          </form>
+        `
+      }
+    };
+
+    function openPolicyModal(key) {
+      const content = LEGAL_CONTENT[key];
+      if (content) {
+        legalModalTitle.textContent = content.title;
+        legalModalBody.innerHTML = content.body;
+        legalModalBackdrop.classList.remove('hidden');
+        legalModalBackdrop.classList.add('flex');
+
+        if (key === 'contact') {
+          const contactForm = document.getElementById('contactForm');
+          if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+              e.preventDefault();
+              document.getElementById('contactSuccessMsg').classList.remove('hidden');
+              setTimeout(() => {
+                legalModalBackdrop.classList.add('hidden');
+              }, 1800);
+            });
+          }
+        }
+      }
+    }
+    window.openPolicyModal = openPolicyModal;
+
+    closeLegalModalBtn.addEventListener('click', () => legalModalBackdrop.classList.add('hidden'));
+    legalModalBackdrop.addEventListener('click', (e) => {
+      if (e.target === legalModalBackdrop) {
+        legalModalBackdrop.classList.add('hidden');
+      }
+    });
+
+    // Clean trigger print logic preventing blank preview
+    function triggerPrint() {
+      renderCanvas();
+      setTimeout(() => {
+        window.print();
+      }, 150);
+    }
+    window.triggerPrint = triggerPrint;
+
+    // Event Listeners Setup
+    function setupEventListeners() {
+      // Theme Toggle (Day / Night Mode)
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const themeToggleIcon = document.getElementById('themeToggleIcon');
+
+      function applyTheme(t) {
+        if (t === 'light') {
+          document.body.classList.add('light-theme');
+          document.body.setAttribute('data-theme', 'light');
+          themeToggleIcon.textContent = '☀️';
+        } else {
+          document.body.classList.remove('light-theme');
+          document.body.setAttribute('data-theme', 'dark');
+          themeToggleIcon.textContent = '🌙';
+        }
+        localStorage.setItem('qpg_theme', t);
+        state.theme = t;
+      }
+
+      applyTheme(state.theme);
+
+      themeToggleBtn.addEventListener('click', () => {
+        const nextTheme = state.theme === 'dark' ? 'light' : 'dark';
+        applyTheme(nextTheme);
+      });
+
+      // Canvas Viewport Zoom Event Listeners (Step: 0.1, Min: 0.5, Max: 2.0)
+      canvasZoomInBtn.addEventListener('click', () => {
+        applyCanvasPreviewZoom(state.canvasZoomScale + 0.1);
+      });
+
+      canvasZoomOutBtn.addEventListener('click', () => {
+        applyCanvasPreviewZoom(state.canvasZoomScale - 0.1);
+      });
+
+      canvasZoomResetBtn.addEventListener('click', () => {
+        applyCanvasPreviewZoom(1.0);
+      });
+
+      // 18-Tools Dropdown Change Listener
+      const top18ToolsSelect = document.getElementById('top18ToolsSelect');
+      top18ToolsSelect.addEventListener('change', (e) => {
+        const key = e.target.value;
+        state.currentToolKey = key;
+        const spec = TOOLS_SPEC[key];
+        
+        if (key === 'EXAM_MODE') {
+          state.isSingleExamMode = true;
+          document.getElementById('paperSizeSelect').value = 'SINGLE_EXAM_MODE';
+          document.getElementById('singleExamModeContainer').classList.remove('hidden');
+          document.getElementById('gridControlsSection').classList.add('opacity-40', 'pointer-events-none');
+        } else {
+          state.isSingleExamMode = false;
+          if (document.getElementById('paperSizeSelect').value === 'SINGLE_EXAM_MODE') {
+            document.getElementById('paperSizeSelect').value = 'A4';
+            state.paperSize = 'A4';
+          }
+          document.getElementById('singleExamModeContainer').classList.add('hidden');
+          document.getElementById('gridControlsSection').classList.remove('opacity-40', 'pointer-events-none');
+
+          const active = getActiveItem();
+          if (active && !active.locked) {
+            active.widthMm = spec.widthMm;
+            active.heightMm = spec.heightMm;
+          }
+        }
+
+        updateDynamicSeoContent(key);
+        renderQueue();
+        renderCanvas();
+      });
+
+      // Paper select
+      const paperSizeSelect = document.getElementById('paperSizeSelect');
+      paperSizeSelect.addEventListener('change', (e) => {
+        if (e.target.value === 'SINGLE_EXAM_MODE') {
+          state.isSingleExamMode = true;
+          document.getElementById('singleExamModeContainer').classList.remove('hidden');
+          document.getElementById('gridControlsSection').classList.add('opacity-40', 'pointer-events-none');
+        } else {
+          state.isSingleExamMode = false;
+          state.paperSize = e.target.value;
+          document.getElementById('singleExamModeContainer').classList.add('hidden');
+          document.getElementById('gridControlsSection').classList.remove('opacity-40', 'pointer-events-none');
+        }
+        renderCanvas();
+      });
+
+      // Target KB Slider
+      const targetKbSlider = document.getElementById('targetKbSlider');
+      targetKbSlider.addEventListener('input', (e) => {
+        state.singleExamTargetKb = parseInt(e.target.value);
+        document.getElementById('kbSliderVal').textContent = `${state.singleExamTargetKb} KB`;
+        document.getElementById('targetKbDisplay').textContent = `< ${state.singleExamTargetKb} KB`;
+        renderCanvas();
+      });
+
+      // Download Exam Photo
+      document.getElementById('downloadExamPhotoBtn').addEventListener('click', async () => {
+        const active = getActiveItem();
+        if (!active) return;
+        const targetBytes = state.singleExamTargetKb * 1024;
+        
+        let minQ = 0.05, maxQ = 0.98, bestBlob = null;
+        for (let i = 0; i < 9; i++) {
+          const midQ = (minQ + maxQ) / 2;
+          const blob = await new Promise(res => mainCanvas.toBlob(res, 'image/jpeg', midQ));
+          if (blob.size <= targetBytes) {
+            bestBlob = blob;
+            minQ = midQ;
+          } else {
+            maxQ = midQ;
+          }
+        }
+        if (!bestBlob) bestBlob = await new Promise(res => mainCanvas.toBlob(res, 'image/jpeg', 0.15));
+
+        const link = document.createElement('a');
+        link.download = `Exam_Photo_${(bestBlob.size/1024).toFixed(1)}KB.jpg`;
+        link.href = URL.createObjectURL(bestBlob);
+        link.click();
+      });
+
+      // Orientation Toggles with proper active state classes
+      const portraitBtn = document.getElementById('portraitToggleBtn');
+      const landscapeBtn = document.getElementById('landscapeToggleBtn');
+
+      portraitBtn.addEventListener('click', () => {
+        state.orientation = 'portrait';
+        portraitBtn.classList.add('active', 'bg-sky-600', 'text-white');
+        portraitBtn.classList.remove('text-slate-400');
+        landscapeBtn.classList.remove('active', 'bg-sky-600', 'text-white');
+        landscapeBtn.classList.add('text-slate-400');
+        renderCanvas();
+      });
+
+      landscapeBtn.addEventListener('click', () => {
+        state.orientation = 'landscape';
+        landscapeBtn.classList.add('active', 'bg-sky-600', 'text-white');
+        landscapeBtn.classList.remove('text-slate-400');
+        portraitBtn.classList.remove('active', 'bg-sky-600', 'text-white');
+        portraitBtn.classList.add('text-slate-400');
+        renderCanvas();
+      });
+
+      // Sliders & Checkboxes
+      document.getElementById('gapSlider').addEventListener('input', (e) => {
+        state.gapMm = parseFloat(e.target.value);
+        document.getElementById('gapReadout').textContent = `${state.gapMm.toFixed(1)} mm`;
+        renderCanvas();
+      });
+
+      document.getElementById('marginSlider').addEventListener('input', (e) => {
+        state.marginMm = parseFloat(e.target.value);
+        document.getElementById('marginReadout').textContent = `${state.marginMm.toFixed(1)} mm`;
+        renderCanvas();
+      });
+
+      document.getElementById('dashedGuidesCheck').addEventListener('change', (e) => {
+        state.showCutLines = e.target.checked;
+        renderCanvas();
+      });
+
+      // Upload Buttons
+      const portraitFileInput = document.getElementById('portraitFileInput');
+      const docFileInput = document.getElementById('docFileInput');
+
+      document.getElementById('addPersonBtn').addEventListener('click', () => portraitFileInput.click());
+      document.getElementById('addDocumentBtn').addEventListener('click', () => docFileInput.click());
+
+      portraitFileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          const file = e.target.files[0];
+          const reader = new FileReader();
+          reader.onload = (evt) => {
+            const img = new Image();
+            img.onload = () => {
+              const spec = TOOLS_SPEC[state.currentToolKey] || TOOLS_SPEC['IN_PASSPORT'];
+              const item = createItem(img, `Person ${state.items.length + 1}`, spec.widthMm, spec.heightMm, 5, false);
+              state.items.push(item);
+              state.activeItemId = item.id;
+              renderQueue();
+              renderCanvas();
+            };
+            img.src = evt.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+        portraitFileInput.value = '';
+      });
+
+      docFileInput.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) {
+          openCustomCropper(e.target.files[0]);
+        }
+        docFileInput.value = '';
+      });
+
+      // Drag and Drop
+      const dragDropZone = document.getElementById('dragDropZone');
+      dragDropZone.addEventListener('click', () => portraitFileInput.click());
+      dragDropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dragDropZone.classList.add('border-cyan-400');
+      });
+      dragDropZone.addEventListener('dragleave', () => dragDropZone.classList.remove('border-cyan-400'));
+      dragDropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dragDropZone.classList.remove('border-cyan-400');
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+          openCustomCropper(e.dataTransfer.files[0]);
+        }
+      });
+
+      // Background Color Palette
+      document.querySelectorAll('.bg-color-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const active = getActiveItem();
+          if (active && !active.locked) {
+            active.bgColor = btn.getAttribute('data-color');
+            syncCalibrationUI();
+            renderCanvas();
+          }
+        });
+      });
+
+      document.getElementById('customBgColorInput').addEventListener('input', (e) => {
+        const active = getActiveItem();
+        if (active && !active.locked) {
+          active.bgColor = e.target.value;
+          syncCalibrationUI();
+          renderCanvas();
+        }
+      });
+
+      // INNER ZOOM
+      document.getElementById('innerZoomSlider').addEventListener('input', (e) => {
+        const active = getActiveItem();
+        if (active && !active.locked) {
+          active.innerZoom = parseInt(e.target.value);
+          document.getElementById('innerZoomVal').textContent = active.innerZoom + '%';
+          renderCanvas();
+        }
+      });
+
+      // OUTER ZOOM
+      document.getElementById('outerZoomSlider').addEventListener('input', (e) => {
+        const active = getActiveItem();
+        if (active && !active.locked) {
+          active.outerZoom = parseInt(e.target.value);
+          document.getElementById('outerZoomVal').textContent = `Outer Zoom: ${active.outerZoom}%`;
+          renderQueue();
+          renderCanvas();
+        }
+      });
+
+      // ISOLATED NUDGE FRAMING
+      const NUDGE_STEP = 1.0;
+      document.getElementById('nudgeUpBtn').addEventListener('click', () => {
+        const active = getActiveItem();
+        if (active && !active.locked) {
+          active.nudgeY -= NUDGE_STEP;
+          renderCanvas();
+        }
+      });
+      document.getElementById('nudgeDownBtn').addEventListener('click', () => {
+        const active = getActiveItem();
+        if (active && !active.locked) {
+          active.nudgeY += NUDGE_STEP;
+          renderCanvas();
+        }
+      });
+      document.getElementById('nudgeLeftBtn').addEventListener('click', () => {
+        const active = getActiveItem();
+        if (active && !active.locked) {
+          active.nudgeX -= NUDGE_STEP;
+          renderCanvas();
+        }
+      });
+      document.getElementById('nudgeRightBtn').addEventListener('click', () => {
+        const active = getActiveItem();
+        if (active && !active.locked) {
+          active.nudgeX += NUDGE_STEP;
+          renderCanvas();
+        }
+      });
+      document.getElementById('resetNudgeBtn').addEventListener('click', () => {
+        const active = getActiveItem();
+        if (active && !active.locked) {
+          active.nudgeX = 0;
+          active.nudgeY = 0;
+          renderCanvas();
+        }
+      });
+
+      // Brightness & Contrast
+      document.getElementById('brightnessSlider').addEventListener('input', (e) => {
+        const active = getActiveItem();
+        if (active && !active.locked) {
+          active.brightness = parseInt(e.target.value);
+          document.getElementById('brightnessVal').textContent = active.brightness + '%';
+          renderCanvas();
+        }
+      });
+      document.getElementById('contrastSlider').addEventListener('input', (e) => {
+        const active = getActiveItem();
+        if (active && !active.locked) {
+          active.contrast = parseInt(e.target.value);
+          document.getElementById('contrastVal').textContent = active.contrast + '%';
+          renderCanvas();
+        }
+      });
+
+      // Clear Canvas
+      document.getElementById('clearAllCanvasBtn').addEventListener('click', () => {
+        if (confirm('Clear all photos and documents from the sheet?')) {
+          state.items = [];
+          state.activeItemId = null;
+          renderQueue();
+          renderCanvas();
+        }
+      });
+
+      // Export Actions
+      const exportCanvas = (type) => {
+        const link = document.createElement('a');
+        link.download = `QuickPhotoGrid_${Date.now()}.${type === 'png' ? 'png' : 'jpg'}`;
+        link.href = mainCanvas.toDataURL(type === 'png' ? 'image/png' : 'image/jpeg', 0.98);
+        link.click();
+      };
+
+      document.getElementById('topSaveSheetBtn').addEventListener('click', () => exportCanvas('jpeg'));
+      document.getElementById('downloadJpegBtn').addEventListener('click', () => exportCanvas('jpeg'));
+      document.getElementById('downloadPngBtn').addEventListener('click', () => exportCanvas('png'));
+    }
+
+    // Studio Initialization
+    function initStudio() {
+      setupEventListeners();
+      updateDynamicSeoContent('IN_PASSPORT');
+
+      // Clean empty state on startup
+      state.items = [];
+      state.activeItemId = null;
+      renderQueue();
+      renderCanvas();
+    }
+
+    window.addEventListener('DOMContentLoaded', initStudio);
+  </script>
+</body>
+</html>
