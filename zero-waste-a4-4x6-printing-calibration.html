@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to Print 300 DPI Passport Photos on A4 & 4x6 Paper Without Scaling Errors (2026 Studio Guide)</title>
+  <meta name="description" content="Complete 2026 printer calibration guide for Epson, Canon, HP, and Brother photo printers. Fix 'Fit to Page' shrinking, calculate 300 DPI pixels, and pack up to 35 passport photos on A4 or 8 on 4x6 sheets." />
+  <meta name="keywords" content="print passport photos 300 dpi, passport photo printing scaling error, how many passport photos fit on 4x6, A4 passport photo sheet layout, actual size vs fit to page printing, Epson L805 L3210 photo print settings" />
+  <link rel="canonical" href="https://quickphotogrid.com/zero-waste-a4-4x6-printing-calibration.html" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- JSON-LD FAQ Schema for Google Rich Snippets -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do my passport photos print smaller than 35x45 mm on A4 or 4x6 paper?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Operating system print dialogs default to 'Fit to Page' or 'Shrink to Printable Area', which automatically scales down the entire image by 4% to 6% to accommodate printer roller margins. Always select '100% Scale' or 'Actual Size' before printing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the exact 300 DPI pixel dimensions of A4 and 4x6 photo sheets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At 300 DPI, a 4x6 inch sheet (102 x 152 mm) is exactly 1200 x 1800 pixels, a 5x7 inch sheet is 1500 x 2100 pixels, and a full A4 sheet (210 x 297 mm) is 2480 x 3508 pixels."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I print both passport photos and Aadhaar/ID cards on the same sheet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. QuickPhotoGrid's Dual Upload Tray uses a dynamic baseline shelf-packing engine that lets you combine passport portraits and cropped ID cards on a single 4x6 or A4 sheet with zero wasted paper."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body class="bg-slate-950 text-slate-200 font-sans antialiased selection:bg-sky-500 selection:text-white">
+
+  <!-- Header Navigation -->
+  <header class="border-b border-slate-800 bg-slate-900/95 sticky top-0 z-20 backdrop-blur">
+    <div class="max-w-4xl mx-auto py-4 px-6 flex items-center justify-between">
+      <a href="index.html" class="text-xl font-bold text-white flex items-center gap-2.5">
+        <span class="bg-sky-500 text-slate-950 px-2 py-0.5 rounded-md font-extrabold tracking-tight">QP</span>
+        <span>QuickPhotoGrid</span>
+      </a>
+      <a href="index.html" class="bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs sm:text-sm px-4 py-2 rounded-lg transition-colors">
+        Open Zero-Waste Layout Tool &rarr;
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Article Content -->
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-12 leading-relaxed">
+
+    <!-- Hero Title & Breadcrumb -->
+    <section class="space-y-4 border-b border-slate-800 pb-8">
+      <nav aria-label="Breadcrumb" class="text-xs text-slate-400 flex items-center gap-2">
+        <a href="index.html" class="hover:text-sky-400">Home</a>
+        <span>/</span>
+        <span>Biometric Photo Guides</span>
+        <span>/</span>
+        <span class="text-slate-300">A4 &amp; 4×6 Printer Calibration</span>
+      </nav>
+      <div class="inline-flex items-center gap-2 bg-sky-500/10 border border-sky-500/30 text-sky-400 text-xs font-semibold px-3 py-1 rounded-full">
+        <span>🖨️ 300 DPI Lab-Grade Precision</span>
+        <span>&bull;</span>
+        <span>Epson, Canon, HP &amp; Brother</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+        How to Print 300 DPI Passport Photos on A4 &amp; 4×6 Paper Without Scaling Errors (Complete Studio Calibration Guide)
+      </h1>
+      <p class="text-slate-300 text-base sm:text-lg">
+        Even when you crop a passport portrait to exact biometric dimensions on screen, a single misconfigured checkbox in your Windows, macOS, or mobile print dialog can shrink a 35×45 mm photo down to 32×41 mm—rendering the entire sheet unusable at embassies or passport offices. Furthermore, rigid CSS grid templates leave up to 40% of expensive glossy paper empty whenever you mix portrait sizes with ID cards. This engineering guide explains exact 300 DPI pixel math, printer driver overrides, and zero-waste sheet packing.
+      </p>
+    </section>
+
+    <!-- Section 1: 300 DPI Math & Sheet Capacity Table -->
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-white">1. 300 DPI Pixel-to-Millimeter Reference &amp; Sheet Capacity Chart</h2>
+      <p class="text-slate-300">
+        Commercial minilabs and inkjet photo printers operate at <strong>300 Dots Per Inch (DPI)</strong>, where 1 inch equals exactly 300 pixels (11.811 pixels per millimeter). QuickPhotoGrid generates every canvas at native 300 DPI pixel density:
+      </p>
+
+      <div class="overflow-x-auto border border-slate-800 rounded-xl">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-slate-900 text-slate-300 uppercase text-xs border-b border-slate-800">
+            <tr>
+              <th class="py-3.5 px-4">Paper Sheet Size</th>
+              <th class="py-3.5 px-4">Physical Dimensions</th>
+              <th class="py-3.5 px-4">300 DPI Pixel Canvas</th>
+              <th class="py-3.5 px-4">35×45 mm Capacity</th>
+              <th class="py-3.5 px-4">2×2 Inch Capacity</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800 bg-slate-950/60 text-slate-300">
+            <tr>
+              <td class="py-3 px-4 font-semibold text-white">4 × 6 Photo Paper</td>
+              <td class="py-3 px-4">102 × 152 mm (4 × 6 in)</td>
+              <td class="py-3 px-4">1200 × 1800 px</td>
+              <td class="py-3 px-4">Up to 8 Photos</td>
+              <td class="py-3 px-4">2 Photos</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold text-white">5 × 7 Photo Paper</td>
+              <td class="py-3 px-4">127 × 178 mm (5 × 7 in)</td>
+              <td class="py-3 px-4">1500 × 2100 px</td>
+              <td class="py-3 px-4">Up to 12 Photos</td>
+              <td class="py-3 px-4">6 Photos</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold text-white">A4 Full Sheet</td>
+              <td class="py-3 px-4">210 × 297 mm (8.27 × 11.69 in)</td>
+              <td class="py-3 px-4">2480 × 3508 px</td>
+              <td class="py-3 px-4">Up to 35 Photos</td>
+              <td class="py-3 px-4">15 Photos</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4 font-semibold text-white">US Letter Sheet</td>
+              <td class="py-3 px-4">216 × 279 mm (8.5 × 11 in)</td>
+              <td class="py-3 px-4">2550 × 3300 px</td>
+              <td class="py-3 px-4">Up to 30 Photos</td>
+              <td class="py-3 px-4">15 Photos</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 2: Step-by-Step Printer Driver Configuration -->
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-white">2. Step-by-Step: Mandatory Printer Settings (Epson, Canon, HP &amp; Brother)</h2>
+      <p class="text-slate-300">
+        Follow these exact five steps whenever printing from Chrome, Edge, Windows Photo Viewer, or macOS Preview:
+      </p>
+      <ol class="list-decimal pl-6 space-y-3 text-slate-300">
+        <li><strong>Step 1 — Match Physical &amp; Digital Paper Sizes:</strong> Ensure the paper size chosen under QuickPhotoGrid's <em>Paper Layout</em> panel (e.g., <strong>A4</strong> or <strong>4×6</strong>) matches the exact paper size selected inside your printer driver's <em>Printing Preferences</em>.</li>
+        <li><strong>Step 2 — Disable "Fit to Page" / Enable "100% Scale":</strong> Expand <em>More Settings</em> in your browser print dialog and change Scale from <em>Default / Fit to Printable Area</em> to <strong>Custom: 100</strong> (or <strong>Actual Size</strong>).</li>
+        <li><strong>Step 3 — Set Margins to None (or Use Outer Sheet Margin Slider):</strong> Set browser margins to <strong>None</strong>. QuickPhotoGrid's built-in <strong>Outer Sheet Margin</strong> slider (default 11 mm on A4 and 4 mm on 4×6) already reserves safe grip space for your printer's feed rollers.</li>
+        <li><strong>Step 4 — Select Photo Paper Media Type:</strong> In your Epson (L805/L3210), Canon (G3010/Pixma), or HP Smart Tank driver, switch Media Type from <em>Plain Paper</em> to <strong>Photo Paper Glossy</strong> or <strong>Matte Photo Paper</strong> so the printer uses high-density pigment/dye ink droplets without bleeding.</li>
+        <li><strong>Step 5 — Verify with a Millimeter Ruler:</strong> After printing, measure one photo edge with a standard ruler—it will match 35.0 × 45.0 mm (or 51.0 × 51.0 mm) to sub-millimeter accuracy.</li>
+      </ol>
+    </section>
+
+    <!-- Callout CTA -->
+    <section class="bg-gradient-to-r from-slate-900 to-slate-900/70 border border-sky-500/30 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+      <div class="space-y-2">
+        <h3 class="text-xl font-bold text-white">Eliminate 40% Photo Paper Waste with Dynamic Shelf Packing</h3>
+        <p class="text-sm text-slate-300">
+          Pack multiple family members' passport portraits alongside cropped Aadhaar, PAN, or Driver's License cards onto a single sheet with dashed cutting guides and optional studio batch stamps.
+        </p>
+      </div>
+      <a href="index.html" class="shrink-0 bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold px-5 py-3 rounded-xl text-sm transition-colors shadow-lg">
+        Open Zero-Waste Studio &rarr;
+      </a>
+    </section>
+
+    <!-- Section 3: Troubleshooting Guide -->
+    <section class="space-y-4">
+      <h2 class="text-2xl font-bold text-white">3. Quick Troubleshooting: Fixing Common Print Issues</h2>
+      <ul class="list-disc pl-6 space-y-2.5 text-slate-300">
+        <li><strong>Edges Cut Off on 4×6 Borderless Prints:</strong> Borderless printer drivers naturally expand the image by ~2% ("Expansion / Amount of Extension") to prevent white borders. Set <em>Expansion</em> to <strong>Min</strong> in your printer driver or increase QuickPhotoGrid's <em>Outer Sheet Margin</em> to <strong>5 mm</strong>.</li>
+        <li><strong>Horizontal Lines or Banding on Glossy Paper:</strong> Run a quick <em>Print Head Nozzle Check</em> in your printer utility and switch Print Quality from <em>Standard</em> to <strong>High / Best</strong>.</li>
+        <li><strong>Colors Look Washed Out or Too Dark:</strong> Ensure you loaded the coated glossy side of the photo paper facing the print head, and use QuickPhotoGrid's <strong>Brightness &amp; Contrast</strong> sliders (+5% brightness) if your specific ink set prints slightly warm.</li>
+      </ul>
+    </section>
+
+    <!-- Section 4: Visible FAQ Section -->
+    <section class="space-y-4 border-t border-slate-800 pt-8">
+      <h2 class="text-2xl font-bold text-white">4. Frequently Asked Questions (300 DPI Sheet Printing)</h2>
+      <div class="space-y-4">
+        <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-1.5">
+          <h3 class="font-bold text-white text-base">Should I export as PNG or JPEG for retail photo lab kiosks (CVS, Walgreens, Local Labs)?</h3>
+          <p class="text-sm text-slate-300">Both <strong>Download PNG</strong> and <strong>Download JPEG</strong> inside QuickPhotoGrid export at full 300 DPI resolution. JPEG is universally accepted by instant photo kiosks and USB print machines, while PNG offers lossless sharpness for desktop inkjet printing.</p>
+        </div>
+        <div class="bg-slate-900/60 border border-slate-800 rounded-xl p-5 space-y-1.5">
+          <h3 class="font-bold text-white text-base">How do Dashed Cutting Lines help when trimming 35 photos on an A4 sheet?</h3>
+          <p class="text-sm text-slate-300">Enabling <strong>Dashed Cutting Lines</strong> draws ultra-fine 1 px alignment guides around each photo footprint, allowing you to slice entire rows cleanly with a paper trimmer or scissors without leaving uneven white borders.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related Guides Navigation -->
+    <section class="border-t border-slate-800 pt-8 space-y-4">
+      <h2 class="text-lg font-bold text-white">Explore Country-Specific Biometric Guides</h2>
+      <div class="grid sm:grid-cols-3 gap-4 text-sm">
+        <a href="us-visa-2x2-photo-guide.html" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 rounded-xl p-4 transition-colors">
+          <p class="font-semibold text-sky-400">🇺🇸 US Passport &amp; Visa (2×2 in)</p>
+          <p class="text-xs text-slate-400 mt-1">DS-160 &amp; U.S. passport specifications</p>
+        </a>
+        <a href="schengen-uk-35x45mm-photo-guide.html" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 rounded-xl p-4 transition-colors">
+          <p class="font-semibold text-sky-400">🇪🇺 UK &amp; Schengen (35×45 mm)</p>
+          <p class="text-xs text-slate-400 mt-1">European &amp; UK biometric visa standards</p>
+        </a>
+        <a href="indian-passport-exam-photo-compression.html" class="bg-slate-900/80 hover:bg-slate-900 border border-slate-800 rounded-xl p-4 transition-colors">
+          <p class="font-semibold text-sky-400">🇮🇳 Indian Passport &amp; Exam Guide</p>
+          <p class="text-xs text-slate-400 mt-1">35×45 mm &amp; 20KB–50KB portal rules</p>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 py-8 px-6 text-center text-xs text-slate-500 space-y-2">
+    <p>QuickPhotoGrid &copy; 2026 All rights reserved.</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="index.html" class="hover:text-slate-300">Home</a>
+      <span>&bull;</span>
+      <a href="about.html" class="hover:text-slate-300">About Us</a>
+      <span>&bull;</span>
+      <a href="contact.html" class="hover:text-slate-300">Contact Us</a>
+      <span>&bull;</span>
+      <a href="privacy-policy.html" class="hover:text-slate-300">Privacy Policy</a>
+      <span>&bull;</span>
+      <a href="terms.html" class="hover:text-slate-300">Terms &amp; Conditions</a>
+      <span>&bull;</span>
+      <a href="disclaimer.html" class="hover:text-slate-300">Disclaimer</a>
+    </div>
+  </footer>
+
+</body>
+</html>

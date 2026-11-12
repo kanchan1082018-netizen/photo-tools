@@ -797,6 +797,48 @@
         </svg>
         <span>100% Client-Side Privacy</span>
       </div>
+<!-- PHOTO GUIDES DROPDOWN -->
+<!-- PHOTO GUIDES DROPDOWN (Day & Night Mode Compatible) -->
+<div class="relative inline-block text-left" id="guidesDropdownContainer">
+  <button type="button" onclick="toggleGuidesDropdown(event)" class="flex items-center gap-1.5 bg-brand-card hover:opacity-90 border border-brand-borderLight text-slate-200 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer shadow-sm">
+    <span>📖 Photo Guides</span>
+    <svg class="w-3 h-3 opacity-75" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+  </button>
+  
+  <!-- Dropdown Menu -->
+  <div id="guidesDropdownMenu" class="hidden absolute left-0 mt-2 w-64 bg-brand-card border border-brand-borderLight rounded-xl shadow-2xl z-[9999] overflow-hidden">
+    <div class="py-1.5">
+      <a href="us-visa-2x2-photo-guide.html" class="flex items-center gap-3 px-4 py-2.5 text-xs text-slate-200 hover:bg-sky-500/10 transition-colors">
+        <span class="text-base">🇺🇸</span>
+        <div>
+          <p class="font-semibold">US Visa &amp; Passport Guide</p>
+          <p class="text-[10px] text-slate-400">2×2 Inch Specifications</p>
+        </div>
+      </a>
+      <a href="schengen-uk-35x45mm-photo-guide.html" class="flex items-center gap-3 px-4 py-2.5 text-xs text-slate-200 hover:bg-sky-500/10 transition-colors border-t border-brand-border">
+        <span class="text-base">🇪🇺</span>
+        <div>
+          <p class="font-semibold">UK &amp; Schengen Visa Guide</p>
+          <p class="text-[10px] text-slate-400">35×45 mm Specifications</p>
+        </div>
+      </a>
+      <a href="indian-passport-exam-photo-compression.html" class="flex items-center gap-3 px-4 py-2.5 text-xs text-slate-200 hover:bg-sky-500/10 transition-colors border-t border-brand-border">
+        <span class="text-base">🇮🇳</span>
+        <div>
+          <p class="font-semibold">Indian Passport &amp; Exam Guide</p>
+          <p class="text-[10px] text-slate-400">Passport, Sign &amp; Size Rules</p>
+        </div>
+      </a>
+      <a href="zero-waste-a4-4x6-printing-calibration.html" class="flex items-center gap-3 px-4 py-2.5 text-xs text-slate-200 hover:bg-sky-500/10 transition-colors border-t border-brand-border">
+        <span class="text-base">🖨️</span>
+        <div>
+          <p class="font-semibold">A4 &amp; 4×6 Printer Guide</p>
+          <p class="text-[10px] text-slate-400">300 DPI Calibration &amp; Scaling</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
     </div>
 
     <!-- Center: Prominent 18-Tools Standard Preset Selector -->
@@ -868,6 +910,42 @@
     <!-- --------------------------------------------------------------------- -->
     <aside class="sidebar-left w-80 bg-brand-panel border-r border-brand-border flex flex-col shrink-0 h-full max-h-[calc(100vh-56px)] overflow-y-auto">
       <div class="p-3.5 flex-1 space-y-3.5">
+<!-- AI BACKGROUND REMOVER (Clean Minimal & High Contrast) -->
+        <div style="background-color: #ffffff; border: 2px solid #cbd5e1; border-radius: 12px; padding: 12px; margin-bottom: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+          
+          <!-- Header -->
+          <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
+            <span style="font-size: 16px;">✨</span>
+            <span style="font-weight: 800; font-size: 12px; color: #0284c7; text-transform: uppercase; letter-spacing: 0.5px;">AI Background Remover</span>
+          </div>
+
+          <!-- Status Text (No empty ugly box, clean dynamic text) -->
+          <div id="ai-bg-status" style="font-size: 11px; font-weight: 800; color: #0f172a; min-height: 0px; margin-bottom: 6px;"></div>
+
+          <!-- File Input & Action Button -->
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <input type="file" id="ai-bg-file" accept="image/*" style="font-size: 11px; font-weight: 600; color: #0f172a; border: 1px solid #cbd5e1; border-radius: 6px; padding: 4px; background: #f8fafc;" />
+            
+            <button id="ai-bg-btn" style="width: 100%; padding: 8px 10px; background-color: #059669; color: #ffffff; font-weight: 800; font-size: 12px; border-radius: 6px; border: none; cursor: pointer;">
+              Remove Background
+            </button>
+          </div>
+
+          <!-- Canvas Preview & Dual Action Buttons -->
+          <div style="margin-top: 10px; display: flex; flex-direction: column; align-items: center;">
+            <canvas id="ai-bg-canvas" style="max-width: 100%; max-height: 160px; border-radius: 6px; border: 1px solid #cbd5e1; background: repeating-conic-gradient(#cbd5e1 0% 25%, #ffffff 0% 50%) 50% / 16px 16px;"></canvas>
+            
+            <!-- Button Container: Download PNG + Add to Sheet -->
+            <div id="ai-bg-actions" class="hidden" style="margin-top: 8px; display: flex; gap: 6px; width: 100%;">
+              <a id="ai-bg-download" style="flex: 1; text-align: center; padding: 6px 4px; background-color: #2563eb; color: #ffffff; font-weight: 700; font-size: 11px; border-radius: 6px; text-decoration: none; cursor: pointer;">
+                ⬇️ Download PNG
+              </a>
+              <button id="ai-bg-add-sheet" style="flex: 1; text-align: center; padding: 6px 4px; background-color: #0284c7; color: #ffffff; font-weight: 700; font-size: 11px; border-radius: 6px; border: none; cursor: pointer;">
+                ➕ Add to Sheet
+              </button>
+            </div>
+          </div>
+        </div>
         
         <!-- Header -->
         <div class="flex items-center justify-between">
@@ -945,7 +1023,16 @@
 
         <!-- Toolbar Right: Zoom Controls and Clear All Canvas -->
         <div class="flex items-center space-x-2">
-          <!-- Canvas Viewport Zoom Controller -->
+<!-- Orientation Toggle with High Contrast .btn-toggle -->
+          <div id="orientationToggleWrapper" class="flex items-center justify-between text-xs pt-0.5">
+    
+            <div class="orientation-btn-group flex bg-slate-900 p-0.5 rounded-lg border border-slate-700/80">
+              <button id="portraitToggleBtn" class="btn-toggle active px-3 py-1 rounded-md bg-sky-600 text-white font-semibold text-xs shadow-sm transition-all">Portrait</button>
+              <button id="landscapeToggleBtn" class="btn-toggle px-3 py-1 rounded-md text-slate-400 hover:text-white text-xs font-medium transition-all">Landscape</button>
+            </div>
+          </div>
+          
+<!-- Canvas Viewport Zoom Controller -->
           <div id="canvasZoomGroup" class="flex items-center bg-[#1e293b] border border-[#334155] rounded-lg p-0.5 space-x-1">
             <button id="canvasZoomOutBtn" type="button" class="px-2 py-0.5 text-xs font-semibold text-white hover:bg-slate-700 rounded transition-colors" title="Zoom Out (Down to 50%)">−</button>
             <button id="canvasZoomResetBtn" type="button" class="px-2 py-0.5 text-xs font-semibold text-white hover:bg-slate-700 rounded font-mono transition-colors" title="Reset Zoom to 100%">100%</button>
@@ -1143,17 +1230,28 @@
               </svg>
               <span>Download Form Photo (.jpg)</span>
             </button>
+<div class="grid grid-cols-2 gap-2">
+            <button id="downloadPngBtn" class="flex items-center justify-center space-x-1.5 py-2 px-2 rounded-lg bg-brand-card hover:bg-brand-panelHover border border-brand-border text-slate-300 hover:text-white text-xs font-semibold transition-colors">
+              <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download PNG</span>
+            </button>
+            <button id="downloadJpegBtn" class="flex items-center justify-center space-x-1.5 py-2 px-2 rounded-lg bg-brand-card hover:bg-brand-panelHover border border-brand-border text-slate-300 hover:text-white text-xs font-semibold transition-colors">
+              <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="7 10 12 15 17 10"/>
+                <line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              <span>Download JPEG</span>
+            </button>
           </div>
-
-          <!-- Orientation Toggle with High Contrast .btn-toggle -->
-          <div id="orientationToggleWrapper" class="flex items-center justify-between text-xs pt-0.5">
-            <span class="text-slate-400">Orientation:</span>
-            <div class="orientation-btn-group flex bg-slate-900 p-0.5 rounded-lg border border-slate-700/80">
-              <button id="portraitToggleBtn" class="btn-toggle active px-3 py-1 rounded-md bg-sky-600 text-white font-semibold text-xs shadow-sm transition-all">Portrait</button>
-              <button id="landscapeToggleBtn" class="btn-toggle px-3 py-1 rounded-md text-slate-400 hover:text-white text-xs font-medium transition-all">Landscape</button>
-            </div>
           </div>
-        </div>
+          </div>
+           
+          
 
         <!-- SECTION 2: GRID & GUIDE CONTROLS -->
         <div id="gridControlsSection" class="space-y-3 pt-2.5 border-t border-brand-border">
@@ -1217,37 +1315,7 @@
           </div>
         </div>
 
-        <!-- Action Buttons Section -->
-        <div class="space-y-2 pt-2 border-t border-brand-border">
-          <button onclick="triggerPrint()" class="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:bg-emerald-700 text-white font-bold text-xs flex items-center justify-center space-x-2 shadow-lg shadow-emerald-950/40 transition-all">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="6 9 6 2 18 2 18 9"/>
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-              <rect width="12" height="8" x="6" y="14"/>
-            </svg>
-            <span>PRINT SHEET (Single Page)</span>
-          </button>
-
-          <div class="grid grid-cols-2 gap-2">
-            <button id="downloadPngBtn" class="flex items-center justify-center space-x-1.5 py-2 px-2 rounded-lg bg-brand-card hover:bg-brand-panelHover border border-brand-border text-slate-300 hover:text-white text-xs font-semibold transition-colors">
-              <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-              <span>Download PNG</span>
-            </button>
-            <button id="downloadJpegBtn" class="flex items-center justify-center space-x-1.5 py-2 px-2 rounded-lg bg-brand-card hover:bg-brand-panelHover border border-brand-border text-slate-300 hover:text-white text-xs font-semibold transition-colors">
-              <svg class="w-3.5 h-3.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                <polyline points="7 10 12 15 17 10"/>
-                <line x1="12" y1="15" x2="12" y2="3"/>
-              </svg>
-              <span>Download JPEG</span>
-            </button>
-          </div>
-        </div>
-
+        
       </div>
     </aside>
 
@@ -1257,7 +1325,8 @@
   <!-- CUSTOM DRAGGABLE DOCUMENT CROPPING MODAL (FREEFORM + CR80)                -->
   <!-- ========================================================================= -->
   <div id="cropModalBackdrop" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[10000] hidden items-center justify-center p-4">
-    <div class="bg-brand-card border border-brand-borderLight w-full max-w-2xl rounded-2xl p-5 shadow-2xl flex flex-col space-y-4">
+    <div class="bg-brand-card border border-brand-borderLight w-full max-w-[640px] h-[98vh] max-h-[98vh] rounded-xl p-2.5 shadow-2xl flex flex-col justify-between">
+
       <div class="flex items-center justify-between border-b border-brand-border pb-3">
         <div class="flex items-center space-x-2">
           <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
@@ -1275,9 +1344,10 @@
         <button data-ratio="passport" class="crop-ratio-btn px-2.5 py-1 rounded bg-brand-panel text-slate-300 hover:text-white font-medium">Passport (35×45)</button>
       </div>
 
-      <!-- Crop Viewport Container -->
-      <div id="cropContainer" class="relative w-full h-[360px] bg-slate-950 rounded-xl overflow-hidden flex items-center justify-center select-none">
-        <img id="cropSourceImg" class="max-w-full max-h-full object-contain pointer-events-none" alt="Crop Source">
+     
+          <!-- Crop Viewport Container (Max Vertical Stretch) -->
+          <div id="cropContainer" class="relative w-full flex-1 min-h-0 my-1 bg-slate-950/90 rounded-lg overflow-hidden flex items-center justify-center p-0">
+            <img id="cropSourceImg" class="max-w-full max-h-full w-auto h-full object-contain pointer-events-none select-none" alt="Crop Target">
         
         <!-- Draggable & Resizable Overlay Box -->
         <div id="cropBox" class="absolute border-2 border-cyan-400 shadow-[0_0_0_9999px_rgba(0,0,0,0.6)] cursor-move" style="width: 240px; height: 151px; top: 90px; left: 160px;">
@@ -1382,19 +1452,19 @@
     <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center space-x-2">
         <span class="font-bold text-white">QuickPhotoGrid</span>
-        <span>&copy; 2025 All rights reserved.</span>
+        <span>&copy; 2026 All rights reserved.</span>
       </div>
       <div class="footer-links flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-medium">
-        <a href="#about" class="footer-policy-link" onclick="openPolicyModal('about'); return false;">About Us</a>
-        <span class="footer-dot text-slate-600">•</span>
-        <a href="#contact" class="footer-policy-link" onclick="openPolicyModal('contact'); return false;">Contact Us</a>
-        <span class="footer-dot text-slate-600">•</span>
-        <a href="#privacy" class="footer-policy-link" onclick="openPolicyModal('privacy'); return false;">Privacy Policy</a>
-        <span class="footer-dot text-slate-600">•</span>
-        <a href="#terms" class="footer-policy-link" onclick="openPolicyModal('terms'); return false;">Terms &amp; Conditions</a>
-        <span class="footer-dot text-slate-600">•</span>
-        <a href="#disclaimer" class="footer-policy-link" onclick="openPolicyModal('disclaimer'); return false;">Disclaimer</a>
-      </div>
+      <a href="about.html" class="footer-policy-link hover:text-sky-400 transition-colors">About Us</a>
+      <span class="footer-dot text-slate-600">&bull;</span>
+      <a href="contact.html" class="footer-policy-link hover:text-sky-400 transition-colors">Contact Us</a>
+      <span class="footer-dot text-slate-600">&bull;</span>
+      <a href="privacy-policy.html" class="footer-policy-link hover:text-sky-400 transition-colors">Privacy Policy</a>
+      <span class="footer-dot text-slate-600">&bull;</span>
+      <a href="terms.html" class="footer-policy-link hover:text-sky-400 transition-colors">Terms &amp; Conditions</a>
+      <span class="footer-dot text-slate-600">&bull;</span>
+      <a href="disclaimer.html" class="footer-policy-link hover:text-sky-400 transition-colors">Disclaimer</a>
+    </div>
     </div>
   </footer>
 
@@ -2649,5 +2719,439 @@
 
     window.addEventListener('DOMContentLoaded', initStudio);
   </script>
+<!-- Ultra-Fast RMBG-1.4 with WebGPU & Smart Acceleration -->
+  <script type="module">
+    import { AutoModel, AutoProcessor, env, RawImage } from 'https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.3.3';
+
+    env.allowLocalModels = false;
+
+    const bgInput = document.getElementById('ai-bg-file');
+    const bgBtn = document.getElementById('ai-bg-btn');
+    const bgStatus = document.getElementById('ai-bg-status');
+    const bgCanvas = document.getElementById('ai-bg-canvas');
+    const bgDownload = document.getElementById('ai-bg-download');
+    const bgActions = document.getElementById('ai-bg-actions');
+    const bgAddSheetBtn = document.getElementById('ai-bg-add-sheet');
+
+    let model = null;
+    let processor = null;
+    let currentRemovedBlob = null;
+    let currentFileName = 'photo';
+
+    // 1. Fast Resize for Instant Background Removal (768px is crystal-clear for Passports)
+    async function getOptimizedImage(file) {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+          const maxDim = 768; 
+          let targetW = img.width;
+          let targetH = img.height;
+
+          if (targetW > maxDim || targetH > maxDim) {
+            if (targetW > targetH) {
+              targetH = Math.round((targetH * maxDim) / targetW);
+              targetW = maxDim;
+            } else {
+              targetW = Math.round((targetW * maxDim) / targetH);
+              targetH = maxDim;
+            }
+          }
+
+          const offCanvas = document.createElement('canvas');
+          offCanvas.width = targetW;
+          offCanvas.height = targetH;
+          const ctx = offCanvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, targetW, targetH);
+
+          offCanvas.toBlob((blob) => {
+            resolve({ blob, width: targetW, height: targetH });
+          }, 'image/jpeg', 0.92);
+        };
+        img.src = URL.createObjectURL(file);
+      });
+    }
+
+    if (bgBtn) {
+      bgBtn.addEventListener('click', async () => {
+        const file = bgInput.files && bgInput.files[0];
+        if (!file) {
+          alert('Please select an image file first!');
+          return;
+        }
+
+        currentFileName = file.name.replace(/\.[^/.]+$/, '') || 'photo';
+
+        try {
+          bgBtn.disabled = true;
+          bgBtn.innerText = 'Processing...';
+          bgStatus.innerText = '⚡ Optimizing...';
+          if (bgActions) bgActions.classList.add('hidden');
+
+          const { blob: optimizedBlob, width, height } = await getOptimizedImage(file);
+
+          if (!model || !processor) {
+            bgStatus.innerText = '⏳ Loading AI Engine (First Time Only)...';
+            
+            // WebGPU try karega agar laptop GPU support karta ho, warna standard fallback
+            const deviceType = navigator.gpu ? 'webgpu' : 'wasm';
+            
+            model = await AutoModel.from_pretrained('briaai/RMBG-1.4', {
+              config: { model_type: 'custom' },
+              device: deviceType
+            });
+
+            processor = await AutoProcessor.from_pretrained('briaai/RMBG-1.4', {
+              config: {
+                do_normalize: true,
+                do_pad: false,
+                do_rescale: true,
+                do_resize: true,
+                image_mean: [0.5, 0.5, 0.5],
+                feature_extractor_type: "ImageFeatureExtractor",
+                image_std: [1, 1, 1],
+                resample: 2,
+                rescale_factor: 0.00392156862745098,
+                size: { width: 1024, height: 1024 }
+              }
+            });
+          }
+
+          bgStatus.innerText = '🚀 Cutting background...';
+          await new Promise(r => setTimeout(r, 20));
+
+          const image = await RawImage.fromURL(URL.createObjectURL(optimizedBlob));
+          const { pixel_values } = await processor(image);
+          const { output } = await model({ input: pixel_values });
+
+          const maskTensor = output[0].mul(255).to('uint8');
+          const maskRaw = new RawImage(maskTensor.data, maskTensor.dims[2], maskTensor.dims[1], 1);
+          const mask = await maskRaw.resize(width, height);
+
+          bgCanvas.width = width;
+          bgCanvas.height = height;
+          const ctx = bgCanvas.getContext('2d');
+
+          const imgData = ctx.createImageData(width, height);
+          const srcData = image.data;
+          const maskData = mask.data;
+
+          for (let i = 0; i < srcData.length; i += 3) {
+            const pixelIdx = (i / 3) * 4;
+            const maskVal = maskData[i / 3] || 0;
+            imgData.data[pixelIdx] = srcData[i];
+            imgData.data[pixelIdx + 1] = srcData[i + 1];
+            imgData.data[pixelIdx + 2] = srcData[i + 2];
+            imgData.data[pixelIdx + 3] = maskVal;
+          }
+
+          ctx.putImageData(imgData, 0, 0);
+
+          bgCanvas.toBlob((blob) => {
+            currentRemovedBlob = blob;
+            const url = URL.createObjectURL(blob);
+            bgDownload.href = url;
+            bgDownload.download = 'removed-bg-' + currentFileName + '.png';
+
+            if (bgActions) {
+              bgActions.classList.remove('hidden');
+              bgActions.style.display = 'flex';
+            }
+
+            bgStatus.innerText = '✅ Done in seconds!';
+            bgBtn.disabled = false;
+            bgBtn.innerText = 'Remove Background';
+          }, 'image/png');
+
+        } catch (err) {
+          console.error(err);
+          bgStatus.innerText = '❌ Error: ' + err.message;
+          bgBtn.disabled = false;
+          bgBtn.innerText = 'Remove Background';
+        }
+      });
+    }
+
+    // Add To Sheet Integration
+    if (bgAddSheetBtn) {
+      bgAddSheetBtn.addEventListener('click', () => {
+        if (!currentRemovedBlob) {
+          alert('Please remove background first!');
+          return;
+        }
+
+        const transparentFile = new File([currentRemovedBlob], 'removed-bg-' + currentFileName + '.png', { type: 'image/png' });
+
+        const allFileInputs = Array.from(document.querySelectorAll('input[type="file"]'));
+        const personInput = allFileInputs.find(inp => inp.id !== 'ai-bg-file' && inp.id !== 'safe-doc-file-input') || document.querySelector('#person-file-input');
+
+        if (personInput) {
+          const dt = new DataTransfer();
+          dt.items.add(transparentFile);
+          personInput.files = dt.files;
+          personInput.dispatchEvent(new Event('change', { bubbles: true }));
+          personInput.dispatchEvent(new Event('input', { bubbles: true }));
+          bgStatus.innerText = '🚀 Added to Tray & Sheet!';
+        } else {
+          const trayArea = document.querySelector('#dual-upload-tray') || document.querySelector('.sidebar-left') || document.body;
+          const dt = new DataTransfer();
+          dt.items.add(transparentFile);
+          trayArea.dispatchEvent(new DragEvent('drop', { bubbles: true, cancelable: true, dataTransfer: dt }));
+          bgStatus.innerText = '🚀 Added to Tray & Sheet!';
+        }
+      });
+    }
+  </script>
+<!-- Secure PDF & Document Cropper Integration Engine -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  if (window.pdfjsLib) {
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+
+  // 1. Dedicated Input for Document Upload
+  let safeDocInput = document.getElementById('safe-doc-file-input');
+  if (!safeDocInput) {
+    safeDocInput = document.createElement('input');
+    safeDocInput.type = 'file';
+    safeDocInput.id = 'safe-doc-file-input';
+    safeDocInput.accept = '.pdf,application/pdf,image/*';
+    safeDocInput.style.display = 'none';
+    document.body.appendChild(safeDocInput);
+  }
+
+  // 2. Intercept 'Add Document' Click
+  window.addEventListener('load', bindAddDocButton);
+  bindAddDocButton();
+
+  function bindAddDocButton() {
+    const docButtons = Array.from(document.querySelectorAll('div, button')).filter(el => {
+      return el.innerText && el.innerText.includes('Add Document');
+    });
+
+    if (docButtons.length > 0) {
+      const docBtn = docButtons[docButtons.length - 1];
+      docBtn.onclick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        safeDocInput.value = '';
+        safeDocInput.click();
+      };
+    }
+  }
+
+  // 3. Process File (Image or Password-Protected PDF) & Send to Cropper
+  safeDocInput.addEventListener('change', async (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    // Case A: Image File (JPG / PNG)
+    if (file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        sendImageToCropper(evt.target.result);
+      };
+      reader.readAsDataURL(file);
+      return;
+    }
+
+    // Case B: PDF File (Password Protected or Normal)
+    if (file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf')) {
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        let pdfDoc = null;
+
+        try {
+          const testTask = pdfjsLib.getDocument({ data: arrayBuffer.slice(0) });
+          pdfDoc = await testTask.promise;
+        } catch (err) {
+          if (err.name === 'PasswordException' || (err.message && err.message.toLowerCase().includes('password'))) {
+            const pass = prompt("This PDF is password-protected.।\nPlease enter password:...");
+            if (!pass) return; // User Cancelled
+            const passTask = pdfjsLib.getDocument({ data: arrayBuffer.slice(0), password: pass });
+            pdfDoc = await passTask.promise;
+          } else {
+            throw err;
+          }
+        }
+
+        if (!pdfDoc) return;
+
+        // Render Page 1 at High Resolution for Sharp Aadhaar / Document Details
+        const page = await pdfDoc.getPage(1);
+        const viewport = page.getViewport({ scale: 2.5 });
+        const canvas = document.createElement('canvas');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        const ctx = canvas.getContext('2d');
+
+        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+        const highResUrl = canvas.toDataURL('image/png');
+        sendImageToCropper(highResUrl);
+
+      } catch (err) {
+        console.error("PDF Processing Error:", err);
+        if (err.name === 'PasswordException') {
+          alert("Incorrect password! Please enter the correct password.");
+        } else {
+          alert("Problem opening document: " + err.message);
+        }
+      }
+    }
+  });
+
+  // 4. Directly Display Inside Custom Document Cropping System Modal
+  function sendImageToCropper(imageUrl) {
+    const cropImg = document.getElementById('cropSourceImg');
+    const cropBackdrop = document.getElementById('cropModalBackdrop');
+
+    if (cropImg && cropBackdrop) {
+      cropImg.src = imageUrl;
+      
+      // Modal open karein (Tailwind 'hidden' class hatakar)
+      cropBackdrop.classList.remove('hidden');
+      cropBackdrop.style.display = 'flex';
+
+      // Cropper initialization / layout refresh agar function maujood ho
+      if (typeof window.initDocCropper === 'function') {
+        window.initDocCropper();
+      } else if (typeof window.resetCropBox === 'function') {
+        window.resetCropBox();
+      }
+    } else {
+      alert("Cropping Modal element nahi mila!");
+    }
+  }
+// --- ACCURATE DOCUMENT CROPPING LOGIC ---
+  function closeDocumentCropModal() {
+    const backdrop = document.getElementById('cropModalBackdrop');
+    if (backdrop) {
+      backdrop.classList.add('hidden');
+      backdrop.style.display = 'none';
+    }
+  }
+
+  window.addEventListener('DOMContentLoaded', initModalButtons);
+  initModalButtons();
+
+  function initModalButtons() {
+    const closeBtn = document.getElementById('closeCropModalBtn');
+    if (closeBtn) {
+      closeBtn.onclick = (e) => {
+        e.preventDefault();
+        closeDocumentCropModal();
+      };
+    }
+
+    const allButtons = Array.from(document.querySelectorAll('button'));
+    const cancelBtn = allButtons.find(b => b.innerText && b.innerText.trim() === 'Cancel');
+    if (cancelBtn) {
+      cancelBtn.onclick = (e) => {
+        e.preventDefault();
+        closeDocumentCropModal();
+      };
+    }
+
+    const applyBtn = allButtons.find(b => b.innerText && b.innerText.includes('Apply Document Crop'));
+    if (applyBtn) {
+      applyBtn.onclick = async (e) => {
+        e.preventDefault();
+
+        const cropImg = document.getElementById('cropSourceImg');
+        const cropBox = document.getElementById('cropBox');
+
+        if (!cropImg || !cropBox) {
+          closeDocumentCropModal();
+          return;
+        }
+
+        try {
+          const imgRect = cropImg.getBoundingClientRect();
+          const boxRect = cropBox.getBoundingClientRect();
+
+          // Compute exact visible image bounds considering object-fit: contain
+          const naturalWidth = cropImg.naturalWidth;
+          const naturalHeight = cropImg.naturalHeight;
+          const naturalRatio = naturalWidth / naturalHeight;
+          const renderedRatio = imgRect.width / imgRect.height;
+
+          let visibleWidth = imgRect.width;
+          let visibleHeight = imgRect.height;
+          let offsetX = 0;
+          let offsetY = 0;
+
+          if (renderedRatio > naturalRatio) {
+            visibleWidth = imgRect.height * naturalRatio;
+            offsetX = (imgRect.width - visibleWidth) / 2;
+          } else {
+            visibleHeight = imgRect.width / naturalRatio;
+            offsetY = (imgRect.height - visibleHeight) / 2;
+          }
+
+          const scale = naturalWidth / visibleWidth;
+
+          // Calculate precise crop box coordinates relative to actual pixels
+          const cropX = Math.max(0, (boxRect.left - (imgRect.left + offsetX)) * scale);
+          const cropY = Math.max(0, (boxRect.top - (imgRect.top + offsetY)) * scale);
+          const cropW = Math.min(naturalWidth - cropX, boxRect.width * scale);
+          const cropH = Math.min(naturalHeight - cropY, boxRect.height * scale);
+
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.round(cropW);
+          canvas.height = Math.round(cropH);
+          const ctx = canvas.getContext('2d');
+
+          // Draw ONLY the selected cropped region
+          ctx.drawImage(
+            cropImg,
+            cropX, cropY, cropW, cropH,
+            0, 0, canvas.width, canvas.height
+          );
+
+          canvas.toBlob((blob) => {
+            if (!blob) {
+              closeDocumentCropModal();
+              return;
+            }
+
+            const croppedFile = new File([blob], 'cropped-id-card.png', { type: 'image/png' });
+
+            // Send to tray / upload queue
+            const fileInputs = Array.from(document.querySelectorAll('input[type="file"]')).filter(i => i.id !== 'ai-bg-file' && i.id !== 'safe-doc-file-input');
+            const targetInput = fileInputs.find(i => i.getAttribute('data-type') === 'document' || i.id.includes('doc')) || fileInputs[fileInputs.length - 1];
+
+            if (targetInput) {
+              const dt = new DataTransfer();
+              dt.items.add(croppedFile);
+              targetInput.files = dt.files;
+              targetInput.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+
+            closeDocumentCropModal();
+          }, 'image/png');
+
+        } catch (err) {
+          console.error("Cropping error:", err);
+          closeDocumentCropModal();
+        }
+      };
+    }
+  }
+// Photo Guides Dropdown Toggle Logic
+function toggleGuidesDropdown(event) {
+  event.stopPropagation();
+  const menu = document.getElementById('guidesDropdownMenu');
+  menu.classList.toggle('hidden');
+}
+
+// Close dropdown if user clicks outside
+window.addEventListener('click', function(event) {
+  const container = document.getElementById('guidesDropdownContainer');
+  const menu = document.getElementById('guidesDropdownMenu');
+  if (container && !container.contains(event.target)) {
+    menu.classList.add('hidden');
+  }
+});
+</script>
 </body>
 </html>

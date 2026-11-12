@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - QuickPhotoGrid Studio | Support & Inquiries</title>
+  <meta name="description" content="Contact QuickPhotoGrid Studio for technical support, biometric passport photo dimension requests, printer calibration help, or business and advertising inquiries." />
+  <link rel="canonical" href="https://quickphotogrid.com/contact.html" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-950 text-slate-200 font-sans antialiased selection:bg-sky-500 selection:text-white">
+
+  <!-- Header Navigation -->
+  <header class="border-b border-slate-800 bg-slate-900/95 sticky top-0 z-10 backdrop-blur">
+    <div class="max-w-4xl mx-auto py-4 px-6 flex items-center justify-between">
+      <a href="index.html" class="text-xl font-bold text-white flex items-center gap-2.5">
+        <span class="bg-sky-500 text-slate-950 px-2 py-0.5 rounded-md font-extrabold tracking-tight">QP</span>
+        <span>QuickPhotoGrid</span>
+      </a>
+      <a href="index.html" class="text-sm font-medium text-sky-400 hover:text-sky-300 transition-colors">
+        &larr; Back to Photo Tool
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-6 py-12 space-y-10 leading-relaxed">
+    
+    <!-- Intro Section -->
+    <section class="space-y-4">
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Contact QuickPhotoGrid Studio</h1>
+      <p class="text-slate-300 text-base sm:text-lg">
+        We value feedback from commercial photo studios, digital service centers, students, and everyday users worldwide. Whether you need assistance with biometric photo presets, printer margin calibration, or wish to report a technical issue, our support team is ready to assist you.
+      </p>
+    </section>
+
+    <!-- Contact Details & Direct Form Grid -->
+    <div class="grid md:grid-cols-2 gap-8">
+      
+      <!-- Left Column: Direct Contact Info -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6 space-y-6">
+        <div>
+          <h2 class="text-lg font-bold text-white mb-2">Direct Support Channels</h2>
+          <p class="text-sm text-slate-400">
+            For the fastest resolution, please include your browser name (e.g., Chrome, Edge, Safari) and paper size when reporting technical questions.
+          </p>
+        </div>
+
+        <div class="space-y-4 border-t border-slate-800 pt-4">
+          <div>
+            <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Primary Support Email</span>
+            <p class="text-base font-semibold text-sky-400 mt-0.5">website1082018@gmail.com</p>
+          </div>
+
+          <div>
+            <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Direct Administrative Contact</span>
+            <p class="text-sm font-medium text-slate-200 mt-0.5">sampattechnocontact@gmail.com</p>
+          </div>
+
+          <div>
+            <span class="text-xs uppercase tracking-wider text-slate-400 font-semibold">Standard Response Window</span>
+            <p class="text-sm text-slate-300 mt-0.5">24 to 48 Business Hours (Monday – Saturday)</p>
+          </div>
+        </div>
+
+        <div class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 text-xs text-slate-400 space-y-1.5">
+          <p class="font-semibold text-slate-200">Privacy Note on Support Emails:</p>
+          <p>
+            Please do not attach sensitive personal identity documents (such as Aadhaar, PAN, or Passport scans) when emailing support. Remember that QuickPhotoGrid processes all photos 100% locally inside your browser without server uploads.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Mail Composer Form -->
+      <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-6">
+        <h2 class="text-lg font-bold text-white mb-4">Send Us a Message</h2>
+        <form id="contactForm" onsubmit="sendMail(event)" class="space-y-4">
+          <div>
+            <label for="userName" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Your Name</label>
+            <input type="text" id="userName" required placeholder="Enter your full name"
+              class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500" />
+          </div>
+
+          <div>
+            <label for="userEmail" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Your Email Address</label>
+            <input type="email" id="userEmail" required placeholder="name@example.com"
+              class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500" />
+          </div>
+
+          <div>
+            <label for="inquiryTopic" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Inquiry Category</label>
+            <select id="inquiryTopic"
+              class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500">
+              <option value="Technical Support">Technical Support & Bug Report</option>
+              <option value="New Country Preset Request">Request New Country Photo Preset</option>
+              <option value="Printer & DPI Calibration">Printer & 300 DPI Calibration Help</option>
+              <option value="Business & Advertising">Business, Partnership & Advertising</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="userMessage" class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Message Details</label>
+            <textarea id="userMessage" rows="4" required placeholder="Describe your question or suggestion in detail..."
+              class="w-full bg-slate-950 border border-slate-700 rounded-lg px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-sky-500"></textarea>
+          </div>
+
+          <button type="submit"
+            class="w-full bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold py-2.5 px-4 rounded-lg text-sm transition-colors shadow-sm">
+            Compose & Send Email
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Help Topics Section for Rich Content -->
+    <section class="border-t border-slate-800 pt-8 space-y-4">
+      <h2 class="text-xl font-bold text-white">Common Reasons Users Reach Out</h2>
+      <div class="grid sm:grid-cols-2 gap-4 text-sm text-slate-300">
+        <div class="bg-slate-900/50 border border-slate-800/70 rounded-xl p-4">
+          <h3 class="font-semibold text-white mb-1">Custom Country Biometric Sizes</h3>
+          <p class="text-slate-400">Need a specific passport, visa, or national ID card dimension added to our global dropdown? Share the official mm or pixel specifications with us.</p>
+        </div>
+        <div class="bg-slate-900/50 border border-slate-800/70 rounded-xl p-4">
+          <h3 class="font-semibold text-white mb-1">Exam Portal KB Compression</h3>
+          <p class="text-slate-400">Questions about formatting photographs or signatures under strict 20 KB, 50 KB, or 100 KB limits for competitive examination portals.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-800 py-8 px-6 text-center text-xs text-slate-500 space-y-2">
+    <p>QuickPhotoGrid &copy; 2026 All rights reserved.</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="index.html" class="hover:text-slate-300">Home</a>
+      <span>&bull;</span>
+      <a href="about.html" class="hover:text-slate-300">About Us</a>
+      <span>&bull;</span>
+      <a href="privacy-policy.html" class="hover:text-slate-300">Privacy Policy</a>
+      <span>&bull;</span>
+      <a href="terms.html" class="hover:text-slate-300">Terms &amp; Conditions</a>
+      <span>&bull;</span>
+      <a href="disclaimer.html" class="hover:text-slate-300">Disclaimer</a>
+    </div>
+  </footer>
+
+  <script>
+    function sendMail(e) {
+      e.preventDefault();
+      const name = document.getElementById('userName').value.trim();
+      const email = document.getElementById('userEmail').value.trim();
+      const topic = document.getElementById('inquiryTopic').value;
+      const msg = document.getElementById('userMessage').value.trim();
+      const subject = encodeURIComponent([QuickPhotoGrid - ${topic}] from ${name});
+      const body = encodeURIComponent(Name: ${name}\nReply Email: ${email}\nCategory: ${topic}\n\nMessage:\n${msg});
+      window.location.href = mailto:pappukumarchoupal1992@gmail.com?subject=${subject}&body=${body};
+    }
+  </script>
+</body>
+</html>
