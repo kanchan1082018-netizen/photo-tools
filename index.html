@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>QuickPhotoGrid - Zero-Waste Passport & ID Card Sheet Packing Studio</title>
-  <link rel="canonical" href="https://quickphotogrid.com/" />
   <meta name="description" content="Professional zero-waste passport photo and ID document sheet packing studio. 18 international biometric presets, dynamic zero-gap row packing, custom draggable ID card cropping, and strict 1-page print engine.">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -298,17 +297,6 @@
     body.light-theme #addDocumentBtn span:last-of-type,
     body[data-theme="light"] #addDocumentBtn span:last-of-type {
       color: #475569 !important;
-      font-weight: 500 !important;
-    }
-
-    body.light-theme #dragDropZone,
-    body[data-theme="light"] #dragDropZone {
-      background-color: #f8fafc !important;
-      border-color: #cbd5e1 !important;
-    }
-    body.light-theme #dragDropZone p,
-    body[data-theme="light"] #dragDropZone p {
-      color: #334155 !important;
       font-weight: 500 !important;
     }
 
@@ -812,29 +800,29 @@
       <a href="us-visa-2x2-photo-guide.html" class="flex items-center gap-3 px-4 py-2.5 text-xs text-slate-200 hover:bg-sky-500/10 transition-colors">
         <span class="text-base">🇺🇸</span>
         <div>
-          <p class="font-semibold">US Visa &amp; Passport Guide</p>
+          <p class="font-semibold">US Visa & Passport Guide</p>
           <p class="text-[10px] text-slate-400">2×2 Inch Specifications</p>
         </div>
       </a>
       <a href="schengen-uk-35x45mm-photo-guide.html" class="flex items-center gap-3 px-4 py-2.5 text-xs text-slate-200 hover:bg-sky-500/10 transition-colors border-t border-brand-border">
         <span class="text-base">🇪🇺</span>
         <div>
-          <p class="font-semibold">UK &amp; Schengen Visa Guide</p>
+          <p class="font-semibold">UK & Schengen Visa Guide</p>
           <p class="text-[10px] text-slate-400">35×45 mm Specifications</p>
         </div>
       </a>
       <a href="indian-passport-exam-photo-compression.html" class="flex items-center gap-3 px-4 py-2.5 text-xs text-slate-200 hover:bg-sky-500/10 transition-colors border-t border-brand-border">
         <span class="text-base">🇮🇳</span>
         <div>
-          <p class="font-semibold">Indian Passport &amp; Exam Guide</p>
-          <p class="text-[10px] text-slate-400">Passport, Sign &amp; Size Rules</p>
+          <p class="font-semibold">Indian Passport & Exam Guide</p>
+          <p class="text-[10px] text-slate-400">Passport, Sign & Size Rules</p>
         </div>
       </a>
       <a href="zero-waste-a4-4x6-printing-calibration.html" class="flex items-center gap-3 px-4 py-2.5 text-xs text-slate-200 hover:bg-sky-500/10 transition-colors border-t border-brand-border">
         <span class="text-base">🖨️</span>
         <div>
-          <p class="font-semibold">A4 &amp; 4×6 Printer Guide</p>
-          <p class="text-[10px] text-slate-400">300 DPI Calibration &amp; Scaling</p>
+          <p class="font-semibold">A4 & 4×6 Printer Guide</p>
+          <p class="text-[10px] text-slate-400">300 DPI Calibration & Scaling</p>
         </div>
       </a>
     </div>
@@ -910,9 +898,9 @@
     <!-- COLUMN 1: LEFT SIDEBAR - DUAL UPLOAD TRAY & ITEM QUEUE                -->
     <!-- --------------------------------------------------------------------- -->
     <aside class="sidebar-left w-80 bg-brand-panel border-r border-brand-border flex flex-col shrink-0 h-full max-h-[calc(100vh-56px)] overflow-y-auto">
-      <div class="p-3.5 flex-1 space-y-3.5">
+      <div class="p-3.5 flex-1 space-y-2.5">
 <!-- AI BACKGROUND REMOVER (Clean Minimal & High Contrast) -->
-        <div style="background-color: #ffffff; border: 2px solid #cbd5e1; border-radius: 12px; padding: 12px; margin-bottom: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+        <div style="background-color: #ffffff; border: 2px solid #cbd5e1; border-radius: 12px; padding: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
           
           <!-- Header -->
           <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
@@ -947,19 +935,6 @@
             </div>
           </div>
         </div>
-        
-        <!-- Header -->
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-2 text-slate-300">
-            <svg class="w-4 h-4 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/>
-              <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/>
-              <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>
-            </svg>
-            <span class="text-xs font-bold uppercase tracking-wider text-slate-200">Dual Upload Tray</span>
-          </div>
-          <span id="queueItemCountBadge" class="text-[11px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700/60 font-medium">0 items</span>
-        </div>
 
         <input type="file" id="portraitFileInput" accept="image/*" class="hidden">
         <input type="file" id="docFileInput" accept="image/*" class="hidden">
@@ -989,13 +964,8 @@
               </svg>
             </div>
             <span class="text-xs font-semibold text-amber-400">Add Document</span>
-            <span class="text-[10px] text-slate-400">Crop Aadhaar/PAN</span>
+            <span class="text-[10px] text-slate-400">Crop ID / PAN</span>
           </div>
-        </div>
-
-        <!-- Drag & Drop Zone -->
-        <div id="dragDropZone" class="p-2.5 rounded-lg border border-dashed border-slate-700/80 bg-brand-card/60 text-center hover:border-cyan-500/50 transition-colors cursor-pointer">
-          <p class="text-[11px] text-slate-400">Drag & drop portrait or document photos here</p>
         </div>
 
         <!-- Uploaded Items List -->
@@ -1055,14 +1025,14 @@
       <div class="split-stage flex-1 flex overflow-hidden">
 
         <!-- SUB-COLUMN 2A: RE-ALIGNED PREVIEW CANVAS WITH ZOOM TRANSFORM CONTAINER -->
-        <div id="canvasStageOuter" class="flex-1 p-3 flex items-start justify-center overflow-auto canvas-panel sheet-viewport" style="max-height: calc(100vh - 120px);">
+        <div id="canvasStageOuter" class=" p-2 shrink-0 flex items-start justify-center overflow-auto canvas-panel sheet-viewport" style="max-height: calc(100vh - 120px);">
           <div id="canvasSheetWrapper" class="relative bg-white shadow-[0_20px_50px_-15px_rgba(0,0,0,0.85)] border border-slate-700/60 overflow-hidden flex items-center justify-center shrink-0 transition-transform duration-100 ease-out" style="transform-origin: top center; max-height: 100%;">
             <canvas id="mainCanvas" class="block object-contain" style="max-height: calc(100vh - 140px); max-width: 100%; width: auto; height: auto;"></canvas>
           </div>
         </div>
 
         <!-- SUB-COLUMN 2B: "3. ITEM CALIBRATION" IN EMPTY SPACE -->
-        <div id="calibrationCenterPanel" class="w-[325px] bg-brand-panel/95 border-l border-brand-border p-3.5 overflow-y-auto shrink-0 flex flex-col space-y-3 no-print">
+        <div id="calibrationCenterPanel" class="flex-1 min-w-[360px] bg-brand-panel/95 border-l border-brand-border p-3.5 overflow-y-auto shrink-0 flex flex-col space-y-3 no-print">
           <div class="flex items-center justify-between pb-1 border-b border-brand-border">
             <div class="flex items-center space-x-1.5">
               <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
@@ -1201,7 +1171,7 @@
           <div id="singleExamModeContainer" class="hidden p-3 rounded-xl bg-slate-900 border border-cyan-800/50 space-y-2.5">
             <div class="flex items-center justify-between text-xs font-bold text-cyan-300">
               <span class="target-size-label">Online Exam Form KB Optimizer</span>
-              <span id="targetKbDisplay" class="font-mono text-emerald-400 font-bold">&lt; 50 KB</span>
+              <span id="targetKbDisplay" class="font-mono text-emerald-400 font-bold">< 50 KB</span>
             </div>
             
             <div>
@@ -1453,17 +1423,17 @@
     <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center space-x-2">
         <span class="font-bold text-white">QuickPhotoGrid</span>
-        <span>&copy; 2026 All rights reserved.</span>
+        <span>© 2026 All rights reserved.</span>
       </div>
       <div class="footer-links flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-xs font-medium">
       <a href="about.html" class="footer-policy-link hover:text-sky-400 transition-colors">About Us</a>
-      <span class="footer-dot text-slate-600">&bull;</span>
+      <span class="footer-dot text-slate-600">•</span>
       <a href="contact.html" class="footer-policy-link hover:text-sky-400 transition-colors">Contact Us</a>
-      <span class="footer-dot text-slate-600">&bull;</span>
+      <span class="footer-dot text-slate-600">•</span>
       <a href="privacy-policy.html" class="footer-policy-link hover:text-sky-400 transition-colors">Privacy Policy</a>
-      <span class="footer-dot text-slate-600">&bull;</span>
-      <a href="terms.html" class="footer-policy-link hover:text-sky-400 transition-colors">Terms &amp; Conditions</a>
-      <span class="footer-dot text-slate-600">&bull;</span>
+      <span class="footer-dot text-slate-600">•</span>
+      <a href="terms.html" class="footer-policy-link hover:text-sky-400 transition-colors">Terms & Conditions</a>
+      <span class="footer-dot text-slate-600">•</span>
       <a href="disclaimer.html" class="footer-policy-link hover:text-sky-400 transition-colors">Disclaimer</a>
     </div>
     </div>
@@ -1770,7 +1740,9 @@
     // Queue List UI Rendering with Clean Empty State
     function renderQueue() {
       queueListContainer.innerHTML = '';
-      queueItemCountBadge.textContent = `${state.items.length} item${state.items.length === 1 ? '' : 's'}`;
+      if (queueItemCountBadge) {
+        queueItemCountBadge.textContent = `${state.items.length} item${state.items.length === 1 ? '' : 's'}`;
+      }
 
       if (state.items.length === 0) {
         queueListContainer.innerHTML = `
@@ -2161,7 +2133,7 @@
           Safe Document Cropping: Managing Sensitive Identification Cards
         </h2>
         <p>
-          When printing government cards (such as Aadhaar, PAN, or Driver's Licenses), automated face-detection cropping often clips crucial peripheral micro-text, QR codes, or security barcodes. QuickPhotoGrid provides an unconstrained custom cropping system with 8 draggable handles. Operators can freely preserve all functional machine-readable zones (MRZ) while ensuring pristine card rendering on the sheet.
+          When printing government cards (such as national ID cards, tax cards, or driver's licenses), automated face-detection cropping often clips crucial peripheral micro-text, QR codes, or security barcodes. QuickPhotoGrid provides an unconstrained custom cropping system with 8 draggable handles. Operators can freely preserve all functional machine-readable zones (MRZ) while ensuring pristine card rendering on the sheet.
         </p>
 
         <h2 class="text-xl font-bold text-white border-b border-brand-border pb-2">
@@ -2540,21 +2512,19 @@
         docFileInput.value = '';
       });
 
-      // Drag and Drop
-      const dragDropZone = document.getElementById('dragDropZone');
-      dragDropZone.addEventListener('click', () => portraitFileInput.click());
-      dragDropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dragDropZone.classList.add('border-cyan-400');
-      });
-      dragDropZone.addEventListener('dragleave', () => dragDropZone.classList.remove('border-cyan-400'));
-      dragDropZone.addEventListener('drop', (e) => {
-        e.preventDefault();
-        dragDropZone.classList.remove('border-cyan-400');
-        if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-          openCustomCropper(e.dataTransfer.files[0]);
-        }
-      });
+      // Drag and Drop on Left Sidebar
+      const leftSidebar = document.querySelector('.sidebar-left');
+      if (leftSidebar) {
+        leftSidebar.addEventListener('dragover', (e) => {
+          e.preventDefault();
+        });
+        leftSidebar.addEventListener('drop', (e) => {
+          e.preventDefault();
+          if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            openCustomCropper(e.dataTransfer.files[0]);
+          }
+        });
+      }
 
       // Background Color Palette
       document.querySelectorAll('.bg-color-btn').forEach(btn => {
@@ -2736,24 +2706,87 @@
 
     let model = null;
     let processor = null;
+    let modelInitPromise = null;
     let currentRemovedBlob = null;
     let currentFileName = 'photo';
 
-    // 1. Fast Resize for Instant Background Removal (768px is crystal-clear for Passports)
+    // Silent Background Pre-loader: initializes model + processor into cache/memory after page load
+    async function ensureModelLoaded(showStatus = false) {
+      if (model && processor) {
+        return { model, processor };
+      }
+      if (modelInitPromise) {
+        return modelInitPromise;
+      }
+
+      modelInitPromise = (async () => {
+        if (showStatus && bgStatus) {
+          bgStatus.innerText = '⏳ Loading AI Engine (First Time Only)...';
+        }
+        const deviceType = navigator.gpu ? 'webgpu' : 'wasm';
+
+        const loadedModel = await AutoModel.from_pretrained('briaai/RMBG-1.4', {
+          config: { model_type: 'custom' },
+          device: deviceType
+        });
+
+        const loadedProcessor = await AutoProcessor.from_pretrained('briaai/RMBG-1.4', {
+          config: {
+            do_normalize: true,
+            do_pad: false,
+            do_rescale: true,
+            do_resize: true,
+            image_mean: [0.5, 0.5, 0.5],
+            feature_extractor_type: "ImageFeatureExtractor",
+            image_std: [1, 1, 1],
+            resample: 2,
+            rescale_factor: 0.00392156862745098,
+            size: { width: 1024, height: 1024 }
+          }
+        });
+
+        model = loadedModel;
+        processor = loadedProcessor;
+        return { model, processor };
+      })().catch((err) => {
+        modelInitPromise = null;
+        throw err;
+      });
+
+      return modelInitPromise;
+    }
+
+    // 1. Silent Background Pre-loading on window load
+    window.addEventListener('load', () => {
+      const startPreload = () => {
+        ensureModelLoaded(false).catch((err) => {
+          console.warn('Background AI model preload deferred:', err);
+        });
+      };
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(startPreload, { timeout: 1500 });
+      } else {
+        setTimeout(startPreload, 250);
+      }
+    });
+
+    // 2. Canvas Pre-Resize (Low-MB Input, max 1024px longest side)
     async function getOptimizedImage(file) {
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => {
+        const objectUrl = URL.createObjectURL(file);
         const img = new Image();
         img.onload = () => {
-          const maxDim = 768; 
+          URL.revokeObjectURL(objectUrl);
+          const maxDim = 1024;
           let targetW = img.width;
           let targetH = img.height;
 
           if (targetW > maxDim || targetH > maxDim) {
-            if (targetW > targetH) {
-              targetH = Math.round((targetH * maxDim) / targetW);
+            if (targetW >= targetH) {
+              targetH = Math.max(1, Math.round((targetH * maxDim) / targetW));
               targetW = maxDim;
             } else {
-              targetW = Math.round((targetW * maxDim) / targetH);
+              targetW = Math.max(1, Math.round((targetW * maxDim) / targetH));
               targetH = maxDim;
             }
           }
@@ -2761,20 +2794,30 @@
           const offCanvas = document.createElement('canvas');
           offCanvas.width = targetW;
           offCanvas.height = targetH;
-          const ctx = offCanvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, targetW, targetH);
+          const offCtx = offCanvas.getContext('2d');
+          offCtx.imageSmoothingEnabled = true;
+          offCtx.imageSmoothingQuality = 'high';
+          offCtx.drawImage(img, 0, 0, targetW, targetH);
 
           offCanvas.toBlob((blob) => {
+            if (!blob) {
+              reject(new Error('Failed to resize image on offscreen canvas'));
+              return;
+            }
             resolve({ blob, width: targetW, height: targetH });
           }, 'image/jpeg', 0.92);
         };
-        img.src = URL.createObjectURL(file);
+        img.onerror = () => {
+          URL.revokeObjectURL(objectUrl);
+          reject(new Error('Could not decode selected image'));
+        };
+        img.src = objectUrl;
       });
     }
 
     if (bgBtn) {
       bgBtn.addEventListener('click', async () => {
-        const file = bgInput.files && bgInput.files[0];
+        const file = bgInput && bgInput.files && bgInput.files[0];
         if (!file) {
           alert('Please select an image file first!');
           return;
@@ -2791,36 +2834,20 @@
           const { blob: optimizedBlob, width, height } = await getOptimizedImage(file);
 
           if (!model || !processor) {
-            bgStatus.innerText = '⏳ Loading AI Engine (First Time Only)...';
-            
-            // WebGPU try karega agar laptop GPU support karta ho, warna standard fallback
-            const deviceType = navigator.gpu ? 'webgpu' : 'wasm';
-            
-            model = await AutoModel.from_pretrained('briaai/RMBG-1.4', {
-              config: { model_type: 'custom' },
-              device: deviceType
-            });
-
-            processor = await AutoProcessor.from_pretrained('briaai/RMBG-1.4', {
-              config: {
-                do_normalize: true,
-                do_pad: false,
-                do_rescale: true,
-                do_resize: true,
-                image_mean: [0.5, 0.5, 0.5],
-                feature_extractor_type: "ImageFeatureExtractor",
-                image_std: [1, 1, 1],
-                resample: 2,
-                rescale_factor: 0.00392156862745098,
-                size: { width: 1024, height: 1024 }
-              }
-            });
+            await ensureModelLoaded(true);
           }
 
           bgStatus.innerText = '🚀 Cutting background...';
           await new Promise(r => setTimeout(r, 20));
 
-          const image = await RawImage.fromURL(URL.createObjectURL(optimizedBlob));
+          const optUrl = URL.createObjectURL(optimizedBlob);
+          let image;
+          try {
+            image = await RawImage.fromURL(optUrl);
+          } finally {
+            URL.revokeObjectURL(optUrl);
+          }
+
           const { pixel_values } = await processor(image);
           const { output } = await model({ input: pixel_values });
 
@@ -2977,7 +3004,7 @@
 
         if (!pdfDoc) return;
 
-        // Render Page 1 at High Resolution for Sharp Aadhaar / Document Details
+        // Render Page 1 at High Resolution for Sharp Document Details
         const page = await pdfDoc.getPage(1);
         const viewport = page.getViewport({ scale: 2.5 });
         const canvas = document.createElement('canvas');
